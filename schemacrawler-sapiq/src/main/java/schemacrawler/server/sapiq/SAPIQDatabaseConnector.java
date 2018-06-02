@@ -31,9 +31,9 @@ package schemacrawler.server.sapiq;
 import java.io.IOException;
 import java.sql.Connection;
 
+import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.schemacrawler.DatabaseSpecificOverrideOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
-import schemacrawler.tools.databaseconnector.DatabaseServerType;
 import schemacrawler.tools.iosource.ClasspathInputResource;
 
 public final class SAPIQDatabaseConnector
