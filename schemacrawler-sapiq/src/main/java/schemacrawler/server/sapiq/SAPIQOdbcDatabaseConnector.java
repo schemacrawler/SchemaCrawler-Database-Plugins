@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.schemacrawler.DatabaseSpecificOverrideOptionsBuilder;
+import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.iosource.ClasspathInputResource;
 
@@ -53,12 +53,12 @@ public final class SAPIQOdbcDatabaseConnector
   }
 
   @Override
-  public DatabaseSpecificOverrideOptionsBuilder getDatabaseSpecificOverrideOptionsBuilder(final Connection connection)
+  public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
   {
-    final DatabaseSpecificOverrideOptionsBuilder databaseSpecificOverrideOptionsBuilder = super.getDatabaseSpecificOverrideOptionsBuilder(connection);
+    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder = super.getSchemaRetrievalOptionsBuilder(connection);
     // Unlike the regular JDBC driver, catalogs are not supported
-    databaseSpecificOverrideOptionsBuilder.doesNotSupportCatalogs();
-    return databaseSpecificOverrideOptionsBuilder;
+    schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
+    return schemaRetrievalOptionsBuilder;
   }
 
 }

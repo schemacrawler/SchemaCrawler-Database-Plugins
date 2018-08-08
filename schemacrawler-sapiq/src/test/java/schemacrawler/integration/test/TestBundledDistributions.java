@@ -52,7 +52,7 @@ public class TestBundledDistributions
       .lookupDatabaseConnector("sapiq");
     assertEquals(2,
                  dbConnector
-                   .getDatabaseSpecificOverrideOptionsBuilder(connection)
+                   .getSchemaRetrievalOptionsBuilder(connection)
                    .toOptions().getInformationSchemaViews().size());
   }
 

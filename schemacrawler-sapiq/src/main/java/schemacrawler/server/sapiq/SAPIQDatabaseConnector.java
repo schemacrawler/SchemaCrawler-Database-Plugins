@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.schemacrawler.DatabaseSpecificOverrideOptionsBuilder;
+import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.iosource.ClasspathInputResource;
 
@@ -54,11 +54,11 @@ public final class SAPIQDatabaseConnector
   }
 
   @Override
-  public DatabaseSpecificOverrideOptionsBuilder getDatabaseSpecificOverrideOptionsBuilder(final Connection connection)
+  public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
   {
-    final DatabaseSpecificOverrideOptionsBuilder databaseSpecificOverrideOptionsBuilder = super.getDatabaseSpecificOverrideOptionsBuilder(connection);
-    databaseSpecificOverrideOptionsBuilder.doesNotSupportCatalogs();
-    return databaseSpecificOverrideOptionsBuilder;
+    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder = super.getSchemaRetrievalOptionsBuilder(connection);
+    schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
+    return schemaRetrievalOptionsBuilder;
   }
 
 }

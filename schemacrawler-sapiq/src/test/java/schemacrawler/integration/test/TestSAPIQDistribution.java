@@ -29,7 +29,6 @@ package schemacrawler.integration.test;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 
@@ -60,23 +59,8 @@ public class TestSAPIQDistribution
     final Connection connection = null;
     assertEquals("",
                  dbConnector
-                   .getDatabaseSpecificOverrideOptionsBuilder(connection)
+                   .getSchemaRetrievalOptionsBuilder(connection)
                    .toOptions().getIdentifierQuoteString());
-  }
-
-  @Test
-  public void testSupports()
-    throws Exception
-  {
-    final Connection connection = null;
-    assertTrue(dbConnector.getDatabaseSpecificOverrideOptionsBuilder(connection)
-      .toOptions().hasOverrideForSupportsCatalogs());
-    assertTrue(!dbConnector
-      .getDatabaseSpecificOverrideOptionsBuilder(connection).toOptions()
-      .isSupportsCatalogs());
-    assertTrue(!dbConnector
-      .getDatabaseSpecificOverrideOptionsBuilder(connection).toOptions()
-      .hasOverrideForSupportsSchemas());
   }
 
 }
