@@ -25,6 +25,7 @@ http://www.gnu.org/licenses/
 
 ========================================================================
 */
+
 package schemacrawler.integration.test;
 
 
@@ -35,10 +36,13 @@ import java.sql.Connection;
 
 import org.junit.Test;
 
+import schemacrawler.test.utility.BaseSchemaCrawlerTest;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
+
 public class TestBundledDistributions
+  extends BaseSchemaCrawlerTest
 {
 
   @Test
@@ -51,8 +55,7 @@ public class TestBundledDistributions
     final DatabaseConnector dbConnector = registry
       .lookupDatabaseConnector("sapiq");
     assertEquals(2,
-                 dbConnector
-                   .getSchemaRetrievalOptionsBuilder(connection)
+                 dbConnector.getSchemaRetrievalOptionsBuilder(connection)
                    .toOptions().getInformationSchemaViews().size());
   }
 

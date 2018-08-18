@@ -20,9 +20,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.2.2</version>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-api</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

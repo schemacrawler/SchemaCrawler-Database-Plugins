@@ -5,9 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import schemacrawler.test.utility.BaseSchemaCrawlerTest;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
 public class TestBundledDistributions
+  extends BaseSchemaCrawlerTest
 {
 
   @Test
