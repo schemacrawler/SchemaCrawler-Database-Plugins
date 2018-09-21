@@ -15,7 +15,7 @@
   <packaging>pom</packaging>
   <name>SchemaCrawler Database Plugins</name>
   <description>Additional SchemaCrawler database plugins</description>
-	<url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -31,7 +31,7 @@
   <modules>
     <module>../schemacrawler-sapiq</module>
     <module>../schemacrawler-timesten</module>
-  </modules>	
+  </modules>
   <build>
     <pluginManagement>
       <plugins>
@@ -155,7 +155,8 @@
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
-              <bottom>Copyright © 2000-2018 {organizationName}. All rights reserved.</bottom>
+              <bottom>Copyright © 2000-2018 {organizationName}. All
+                rights reserved.</bottom>
               <doctitle>SchemaCrawler ${project.version}</doctitle>
             </configuration>
           </execution>
@@ -186,9 +187,9 @@
         <configuration>
           <serverId>sonatype-nexus</serverId>
           <nexusUrl>https://oss.sonatype.org</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>
-  </build>	
+  </build>
 </project>
