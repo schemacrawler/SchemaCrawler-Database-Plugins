@@ -28,11 +28,64 @@
       <name>Sonatype Nexus</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
     </repository>
-  </distributionManagement>	
+  </distributionManagement>
   <modules>
     <module>../schemacrawler-sapiq</module>
     <module>../schemacrawler-timesten</module>
-  </modules>	
+  </modules>
+  <profiles>
+    <profile>
+      <id>complete-deployment-build</id>
+      <activation>
+        <property>
+          <name>complete</name>
+        </property>
+      </activation>
+      <properties>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.2</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <phase>test</phase>
+                <configuration>
+                  <excludes>
+                    <exclude>**/JSON*.*</exclude>
+                    <exclude>**/*Test.*</exclude>
+                    <exclude>**/Test*.*</exclude>
+                  </excludes>
+                </configuration>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eluder.coveralls</groupId>
+              <artifactId>coveralls-maven-plugin</artifactId>
+              <version>4.3.0</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>us.fatehi</groupId>
@@ -45,7 +98,7 @@
     <java.version>1.8</java.version>
     <skip.signing.artifacts>true</skip.signing.artifacts>
     <maven.javadoc.skip>true</maven.javadoc.skip>
-  </properties>	
+  </properties>
   <build>
     <pluginManagement>
       <plugins>

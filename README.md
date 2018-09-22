@@ -1,10 +1,7 @@
-[![Build Status](https://travis-ci.org/schemacrawler/SchemaCrawler.svg?branch=master)](https://travis-ci.org/schemacrawler/SchemaCrawler)
-[![Coverage Status](https://img.shields.io/codecov/c/github/schemacrawler/SchemaCrawler/master.svg)](https://codecov.io/gh/schemacrawler/SchemaCrawler)
+[![Build Status](https://travis-ci.org/schemacrawler/SchemaCrawler-Database-Plugins.svg?branch=master)](https://travis-ci.org/schemacrawler/SchemaCrawler-Database-Plugins)
+[![Coverage Status](https://img.shields.io/codecov/c/github/schemacrawler/SchemaCrawler-Database-Plugins/master.svg)](https://codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
 
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler.svg)](https://search.maven.org/search?q=g:us.fatehi%20a:schemacrawler*)
-[![Main distribution](https://img.shields.io/badge/zip-download-blue.svg)](https://github.com/schemacrawler/SchemaCrawler/releases/latest)
-[![Docker Pulls](https://img.shields.io/docker/pulls/schemacrawler/schemacrawler.svg)](https://hub.docker.com/r/schemacrawler/schemacrawler/)
-[![Chocolatey](https://img.shields.io/chocolatey/v/schemacrawler.svg)](https://chocolatey.org/packages/schemacrawler)
 
 
 
