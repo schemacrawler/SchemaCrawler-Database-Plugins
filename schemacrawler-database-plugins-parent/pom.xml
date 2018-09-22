@@ -3,9 +3,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <prerequisites>
-    <maven>3.3.9</maven>
-  </prerequisites>
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
@@ -16,11 +13,26 @@
   <name>SchemaCrawler Database Plugins</name>
   <description>Additional SchemaCrawler database plugins</description>
   <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
-  </properties>
+  <scm>
+    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
+  </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>sonatype-nexus</id>
+      <name>Sonatype Nexus</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </distributionManagement>	
+  <modules>
+    <module>../schemacrawler-sapiq</module>
+    <module>../schemacrawler-timesten</module>
+  </modules>	
   <dependencies>
     <dependency>
       <groupId>us.fatehi</groupId>
@@ -28,10 +40,12 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
-  <modules>
-    <module>../schemacrawler-sapiq</module>
-    <module>../schemacrawler-timesten</module>
-  </modules>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <skip.signing.artifacts>true</skip.signing.artifacts>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+  </properties>	
   <build>
     <pluginManagement>
       <plugins>
@@ -155,8 +169,7 @@
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
-              <bottom>Copyright © 2000-2018 {organizationName}. All
-                rights reserved.</bottom>
+              <bottom>Copyright © 2000-2018 {organizationName}. All rights reserved.</bottom>
               <doctitle>SchemaCrawler ${project.version}</doctitle>
             </configuration>
           </execution>
