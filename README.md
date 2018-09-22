@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/schemacrawler/SchemaCrawler-Database-Plugins.svg?branch=master)](https://travis-ci.org/schemacrawler/SchemaCrawler-Database-Plugins)
 [![Coverage Status](https://img.shields.io/codecov/c/github/schemacrawler/SchemaCrawler-Database-Plugins/master.svg)](https://codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
 
-[![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler.svg)](https://search.maven.org/search?q=g:us.fatehi%20a:schemacrawler*)
+[![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://search.maven.org/search?q=g:us.fatehi%20a:schemacrawler*)
 
 
 
