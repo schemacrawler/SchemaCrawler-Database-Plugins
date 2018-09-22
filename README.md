@@ -10,6 +10,7 @@
 > **Please see the [SchemaCrawler website](http://www.schemacrawler.com/) for more details.**
 
 ## About
+
 SchemaCrawler is a free database schema discovery and comprehension tool. SchemaCrawler is available under a number of [licenses](http://sualeh.github.io/SchemaCrawler/license.html).
 
 This project provides SchemaCrawler database plugins for less frequently used database systems. JDBC drivers for these databases are not provided, and will be separate downloads from their corresponding websites. 
