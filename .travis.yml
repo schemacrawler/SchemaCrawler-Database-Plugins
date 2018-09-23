@@ -3,17 +3,7 @@ jdk:
   - oraclejdk8
 os:
   - linux
-sudo: required
-services:
-  - docker
-notifications:
-  on_success:
-    - change
-  on_failure:
-    - change
-env:
-  global:
-    - SC_BUILD_DIR=`pwd`
+sudo: false
 cache:
   directories:
     - .autoconf
@@ -30,6 +20,4 @@ script:
   - mvn -Dcomplete clean package jacoco:report-aggregate coveralls:report
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-before_deploy:
-  - cd $SC_BUILD_DIR
-  - git fetch --tags
+

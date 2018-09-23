@@ -5,7 +5,7 @@
 
 
 
-# ![SchemaCrawler](https://github.com/sualeh/SchemaCrawler/raw/master/schemacrawler-docs/logo/schemacrawler_logo.png?raw=true) SchemaCrawler
+# ![SchemaCrawler](https://github.com/schemacrawler/SchemaCrawler/raw/master/schemacrawler-docs/logo/schemacrawler_logo.png?raw=true) SchemaCrawler - Additional Database Plugins
 
 > **Please see the [SchemaCrawler website](http://www.schemacrawler.com/) for more details.**
 
