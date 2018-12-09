@@ -2,7 +2,7 @@
 ========================================================================
 SchemaCrawler
 http://www.schemacrawler.com
-Copyright (c) 2000-2017, Sualeh Fatehi <sualeh@hotmail.com>.
+Copyright (c) 2000-2019, Sualeh Fatehi <sualeh@hotmail.com>.
 All rights reserved.
 ------------------------------------------------------------------------
 
@@ -25,6 +25,7 @@ http://www.gnu.org/licenses/
 
 ========================================================================
 */
+
 package schemacrawler.server.sapiq;
 
 
@@ -35,6 +36,7 @@ import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.iosource.ClasspathInputResource;
+
 
 public final class SAPIQOdbcDatabaseConnector
   extends DatabaseConnector

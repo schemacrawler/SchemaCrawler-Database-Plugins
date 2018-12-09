@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>15.02.02</version>
+    <version>15.03.01</version>
   </parent>
   <artifactId>schemacrawler-database-plugins-parent</artifactId>
   <packaging>pom</packaging>
@@ -222,7 +222,7 @@
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
-              <bottom>Copyright © 2000-2018 {organizationName}. All rights reserved.</bottom>
+              <bottom>Copyright © 2000-2019 {organizationName}. All rights reserved.</bottom>
               <doctitle>SchemaCrawler ${project.version}</doctitle>
             </configuration>
           </execution>

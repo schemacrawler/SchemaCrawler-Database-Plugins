@@ -2,7 +2,7 @@
 ========================================================================
 SchemaCrawler
 http://www.schemacrawler.com
-Copyright (c) 2000-2017, Sualeh Fatehi <sualeh@hotmail.com>.
+Copyright (c) 2000-2019, Sualeh Fatehi <sualeh@hotmail.com>.
 All rights reserved.
 ------------------------------------------------------------------------
 
@@ -25,6 +25,7 @@ http://www.gnu.org/licenses/
 
 ========================================================================
 */
+
 package schemacrawler.integration.test;
 
 
@@ -38,6 +39,7 @@ import org.junit.Test;
 import schemacrawler.schemacrawler.SchemaCrawlerException;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
+
 
 public class TestSAPIQDistribution
 {
@@ -58,8 +60,7 @@ public class TestSAPIQDistribution
   {
     final Connection connection = null;
     assertEquals("",
-                 dbConnector
-                   .getSchemaRetrievalOptionsBuilder(connection)
+                 dbConnector.getSchemaRetrievalOptionsBuilder(connection)
                    .toOptions().getIdentifierQuoteString());
   }
 
