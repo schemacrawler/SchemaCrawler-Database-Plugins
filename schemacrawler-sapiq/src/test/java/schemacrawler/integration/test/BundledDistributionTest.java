@@ -29,23 +29,39 @@ http://www.gnu.org/licenses/
 package schemacrawler.integration.test;
 
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-import org.junit.Test;
+import java.sql.Connection;
 
-import schemacrawler.test.utility.BaseSchemaCrawlerTest;
+import org.junit.jupiter.api.Test;
+
+import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
-public class TestBundledDistributions
-  extends BaseSchemaCrawlerTest
+
+public class BundledDistributionTest
 {
 
   @Test
-  public void testPlugin_timesten()
+  public void testContextrmationSchema_sapiq()
+    throws Exception
+  {
+
+    final Connection connection = null;
+    final DatabaseConnectorRegistry registry = new DatabaseConnectorRegistry();
+    final DatabaseConnector dbConnector = registry
+      .lookupDatabaseConnector("sapiq");
+    assertThat(dbConnector.getSchemaRetrievalOptionsBuilder(connection)
+      .toOptions().getInformationSchemaViews().size(), is(2));
+  }
+
+  @Test
+  public void testPlugin_sapiq()
     throws Exception
   {
     final DatabaseConnectorRegistry registry = new DatabaseConnectorRegistry();
-    assertTrue(registry.hasDatabaseSystemIdentifier("timesten"));
+    assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
   }
 
 }
