@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/schemacrawler-database-plugins-parent.iml" filepath="$PROJECT_DIR$/schemacrawler-database-plugins-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../schemacrawler-sapiq/schemacrawler-sapiq.iml" filepath="$PROJECT_DIR$/../schemacrawler-sapiq/schemacrawler-sapiq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../schemacrawler-timesten/schemacrawler-timesten.iml" filepath="$PROJECT_DIR$/../schemacrawler-timesten/schemacrawler-timesten.iml" />
+    </modules>
+  </component>
+</project>
