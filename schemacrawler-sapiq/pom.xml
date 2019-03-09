@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>15.04.01</version>
+    <version>15.05.01</version>
     <relativePath>../schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
   <artifactId>schemacrawler-sapiq</artifactId>
@@ -19,6 +19,12 @@
       <artifactId>schemacrawler</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-commandline</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>us.fatehi</groupId>
       <artifactId>schemacrawler-api</artifactId>
@@ -38,7 +44,7 @@
             <manifestEntries>
               <Project>${project.name}, ${project.version}</Project>
               <Author>Sualeh Fatehi, sualeh@hotmail.com</Author>
-			  <Author>Shant Stepanian</Author>
+              <Author>Shant Stepanian</Author>
             </manifestEntries>
           </archive>
         </configuration>
