@@ -31,12 +31,13 @@ package schemacrawler.server.sapiq;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.function.Predicate;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
+import schemacrawler.tools.executable.commandline.PluginCommand;
 import schemacrawler.tools.iosource.ClasspathInputResource;
-
 
 public final class SAPIQOdbcDatabaseConnector
   extends DatabaseConnector
@@ -46,21 +47,42 @@ public final class SAPIQOdbcDatabaseConnector
     throws IOException
   {
     super(new DatabaseServerType("sapiq", "SAP IQ"),
-          new ClasspathInputResource("/help/Connections.sapiq.txt"),
           new ClasspathInputResource("/schemacrawler-sapiq.config.properties"),
-          (informationSchemaViewsBuilder,
-           connection) -> informationSchemaViewsBuilder
-             .fromResourceFolder("/sapiqodbc.information_schema"),
-          url -> true);
+          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder
+            .fromResourceFolder("/sapiqodbc.information_schema"));
   }
 
   @Override
   public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
   {
-    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder = super.getSchemaRetrievalOptionsBuilder(connection);
+    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder = super.getSchemaRetrievalOptionsBuilder(
+      connection);
     // Unlike the regular JDBC driver, catalogs are not supported
     schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
     return schemaRetrievalOptionsBuilder;
   }
 
+  @Override
+  public PluginCommand getHelpCommand()
+  {
+    final PluginCommand pluginCommand = super.getHelpCommand();
+    pluginCommand.addOption("server",
+                            "--server=sqpiq%n"
+                            + "Loads SchemaCrawler plug-in for SAP IQ",
+                            String.class)
+                 .addOption("host",
+                            "Host name%n" + "Optional, defaults to localhost",
+                            String.class)
+                 .addOption("port",
+                            "Port number%n" + "Optional, defaults to 50000",
+                            Integer.class)
+                 .addOption("database", "Database name", String.class);
+    return pluginCommand;
+  }
+
+  @Override
+  protected Predicate<String> supportsUrlPredicate()
+  {
+    return url -> true;
+  }
 }
