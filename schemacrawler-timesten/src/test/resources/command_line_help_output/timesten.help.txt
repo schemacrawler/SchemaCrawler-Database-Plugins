@@ -1,0 +1,12 @@
+** Connect to Oracle TimesTen
+
+      --database=<database>
+                          DSN name
+      --host=<host>       Host name
+                          Optional, defaults to localhost
+      --port=<port>       Port number
+                          Optional, defaults to 53397
+      --server=<server>   --server=timesten
+                          Loads SchemaCrawler plug-in for Oracle TimesTen
+
+

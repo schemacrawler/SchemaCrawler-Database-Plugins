@@ -35,10 +35,8 @@ import static org.hamcrest.Matchers.is;
 import java.sql.Connection;
 
 import org.junit.jupiter.api.Test;
-
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
-
 
 public class BundledDistributionTest
 {
@@ -49,18 +47,20 @@ public class BundledDistributionTest
   {
 
     final Connection connection = null;
-    final DatabaseConnectorRegistry registry = new DatabaseConnectorRegistry();
-    final DatabaseConnector dbConnector = registry
-      .lookupDatabaseConnector("sapiq");
+    final DatabaseConnectorRegistry registry = DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    final DatabaseConnector dbConnector = registry.lookupDatabaseConnector(
+      "sapiq");
     assertThat(dbConnector.getSchemaRetrievalOptionsBuilder(connection)
-      .toOptions().getInformationSchemaViews().size(), is(2));
+                          .toOptions()
+                          .getInformationSchemaViews()
+                          .size(), is(2));
   }
 
   @Test
   public void testPlugin_sapiq()
     throws Exception
   {
-    final DatabaseConnectorRegistry registry = new DatabaseConnectorRegistry();
+    final DatabaseConnectorRegistry registry = DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
   }
 
