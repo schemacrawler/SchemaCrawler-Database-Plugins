@@ -4,7 +4,7 @@
 
 
 
-![SchemaCrawler](https://github.com/sualeh/SchemaCrawler/raw/master/schemacrawler-distrib/src/site/resources/images/schemacrawler_logo.png?raw=true) 
+![SchemaCrawler](https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/master/schemacrawler-distrib/src/site/resources/images/schemacrawler_logo.png) 
 
 # SchemaCrawler - Additional Database Plugins
 
