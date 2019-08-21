@@ -2,8 +2,9 @@ language: java
 jdk:
   - oraclejdk8
 os:
-  - linux  
-sudo: true
+  - linux
+dist: trusty  
+sudo: false
 cache:
   directories:
     - .autoconf
