@@ -3,6 +3,7 @@ jdk:
   - oraclejdk8
 os:
   - linux
+dist: xenial  
 sudo: false
 cache:
   directories:
