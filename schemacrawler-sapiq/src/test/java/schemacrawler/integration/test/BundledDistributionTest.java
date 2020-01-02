@@ -47,20 +47,23 @@ public class BundledDistributionTest
   {
 
     final Connection connection = null;
-    final DatabaseConnectorRegistry registry = DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    final DatabaseConnector dbConnector = registry.lookupDatabaseConnector(
-      "sapiq");
-    assertThat(dbConnector.getSchemaRetrievalOptionsBuilder(connection)
-                          .toOptions()
-                          .getInformationSchemaViews()
-                          .size(), is(2));
+    final DatabaseConnectorRegistry registry =
+      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    final DatabaseConnector dbConnector =
+      registry.lookupDatabaseConnector("sapiq");
+    assertThat(dbConnector
+                 .getSchemaRetrievalOptionsBuilder(connection)
+                 .toOptions()
+                 .getInformationSchemaViews()
+                 .size(), is(2));
   }
 
   @Test
   public void testPlugin_sapiq()
     throws Exception
   {
-    final DatabaseConnectorRegistry registry = DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    final DatabaseConnectorRegistry registry =
+      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
   }
 

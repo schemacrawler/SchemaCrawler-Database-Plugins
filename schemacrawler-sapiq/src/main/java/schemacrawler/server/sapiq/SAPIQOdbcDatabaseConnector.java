@@ -48,15 +48,15 @@ public final class SAPIQOdbcDatabaseConnector
   {
     super(new DatabaseServerType("sapiq", "SAP IQ"),
           new ClasspathInputResource("/schemacrawler-sapiq.config.properties"),
-          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder
-            .fromResourceFolder("/sapiqodbc.information_schema"));
+          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
+            "/sapiqodbc.information_schema"));
   }
 
   @Override
   public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
   {
-    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder = super.getSchemaRetrievalOptionsBuilder(
-      connection);
+    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder =
+      super.getSchemaRetrievalOptionsBuilder(connection);
     // Unlike the regular JDBC driver, catalogs are not supported
     schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
     return schemaRetrievalOptionsBuilder;
@@ -66,17 +66,17 @@ public final class SAPIQOdbcDatabaseConnector
   public PluginCommand getHelpCommand()
   {
     final PluginCommand pluginCommand = super.getHelpCommand();
-    pluginCommand.addOption("server",
-                            "--server=sqpiq%n"
-                            + "Loads SchemaCrawler plug-in for SAP IQ",
-                            String.class)
-                 .addOption("host",
-                            "Host name%n" + "Optional, defaults to localhost",
-                            String.class)
-                 .addOption("port",
-                            "Port number%n" + "Optional, defaults to 50000",
-                            Integer.class)
-                 .addOption("database", "Database name", String.class);
+    pluginCommand
+      .addOption("server",
+                 "--server=sqpiq%n" + "Loads SchemaCrawler plug-in for SAP IQ",
+                 String.class)
+      .addOption("host",
+                 "Host name%n" + "Optional, defaults to localhost",
+                 String.class)
+      .addOption("port",
+                 "Port number%n" + "Optional, defaults to 50000",
+                 Integer.class)
+      .addOption("database", "Database name", String.class);
     return pluginCommand;
   }
 

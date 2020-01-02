@@ -44,16 +44,16 @@ public final class TimesTenDatabaseConnector
   extends DatabaseConnector
 {
 
-  private static final Logger LOGGER = Logger.getLogger(
-    TimesTenDatabaseConnector.class.getName());
+  private static final Logger LOGGER =
+    Logger.getLogger(TimesTenDatabaseConnector.class.getName());
 
   public TimesTenDatabaseConnector()
     throws IOException
   {
     super(new DatabaseServerType("timesten", "Oracle TimesTen"),
           new ClasspathInputResource("/schemacrawler-timesten.config.properties"),
-          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder
-            .fromResourceFolder("/timesten.information_schema"));
+          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
+            "/timesten.information_schema"));
     LOGGER.log(Level.INFO, "Loaded commandline for Oracle TimesTen");
   }
 
@@ -61,17 +61,18 @@ public final class TimesTenDatabaseConnector
   public PluginCommand getHelpCommand()
   {
     final PluginCommand pluginCommand = super.getHelpCommand();
-    pluginCommand.addOption("server",
-                            "--server=timesten%n"
-                            + "Loads SchemaCrawler plug-in for Oracle TimesTen",
-                            String.class)
-                 .addOption("host",
-                            "Host name%n" + "Optional, defaults to localhost",
-                            String.class)
-                 .addOption("port",
-                            "Port number%n" + "Optional, defaults to 53397",
-                            Integer.class)
-                 .addOption("database", "DSN name", String.class);
+    pluginCommand
+      .addOption("server",
+                 "--server=timesten%n"
+                 + "Loads SchemaCrawler plug-in for Oracle TimesTen",
+                 String.class)
+      .addOption("host",
+                 "Host name%n" + "Optional, defaults to localhost",
+                 String.class)
+      .addOption("port",
+                 "Port number%n" + "Optional, defaults to 53397",
+                 Integer.class)
+      .addOption("database", "DSN name", String.class);
     return pluginCommand;
   }
 

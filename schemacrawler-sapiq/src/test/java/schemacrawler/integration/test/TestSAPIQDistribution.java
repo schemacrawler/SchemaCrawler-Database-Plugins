@@ -49,7 +49,8 @@ public class TestSAPIQDistribution
   public void setup()
     throws SchemaCrawlerException
   {
-    final DatabaseConnectorRegistry registry = DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    final DatabaseConnectorRegistry registry =
+      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     dbConnector = registry.lookupDatabaseConnector("sapiq");
   }
 
@@ -58,9 +59,10 @@ public class TestSAPIQDistribution
     throws Exception
   {
     final Connection connection = null;
-    assertThat(dbConnector.getSchemaRetrievalOptionsBuilder(connection)
-                          .toOptions()
-                          .getIdentifierQuoteString(), is(""));
+    assertThat(dbConnector
+                 .getSchemaRetrievalOptionsBuilder(connection)
+                 .toOptions()
+                 .getIdentifierQuoteString(), is(""));
   }
 
 }
