@@ -35,18 +35,12 @@
   </modules>
   <profiles>
     <profile>
-      <id>complete-deployment-build</id>
+      <id>test-coverage-build</id>
       <activation>
         <property>
-          <name>distrib</name>
+          <name>testcoverage</name>
         </property>
       </activation>
-      <!-- Use these properties to deploy to Nexus
-      <properties>
-        <maven.javadoc.skip>false</maven.javadoc.skip>
-        <skip.signing.artifacts>false</skip.signing.artifacts>
-      </properties>
-      -->
       <build>
         <plugins>
           <plugin>

@@ -34,7 +34,7 @@ jobs:
         mvn \
           --no-transfer-progress \
           --batch-mode \
-          -Ddistrib \
+          -Dtestcoverage \
           -f schemacrawler-database-plugins-parent/pom.xml \
           clean install \
           jacoco:report
