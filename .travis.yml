@@ -1,24 +1,19 @@
+dist: trusty
 language: java
 jdk:
   - oraclejdk8
 os:
   - linux
-dist: trusty  
 sudo: false
 cache:
   directories:
     - .autoconf
     - $HOME/.m2
-    - $HOME/.embedpostgresql
-    - $HOME/.embedmysql
 addons:
   apt:
     packages:
       - graphviz
 script:
   - echo $SC_BUILD_DIR
-  - cd "./schemacrawler-database-plugins-parent"
-  - mvn -Dcomplete clean package jacoco:report-aggregate coveralls:report
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+  - mvn -v
+  - mvn -Ddistrib -f ./schemacrawler-database-plugins-parent/pom.xml clean install
