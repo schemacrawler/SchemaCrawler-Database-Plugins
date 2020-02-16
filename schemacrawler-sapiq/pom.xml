@@ -8,7 +8,6 @@
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
     <version>16.4.1</version>
-    <relativePath>../schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
   <artifactId>schemacrawler-sapiq</artifactId>
   <packaging>jar</packaging>
