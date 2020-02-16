@@ -16,4 +16,4 @@ addons:
 script:
   - echo $SC_BUILD_DIR
   - mvn -v
-  - mvn -Ddistrib -f ./schemacrawler-database-plugins-parent/pom.xml clean install
+  - mvn -Ddistrib clean install
