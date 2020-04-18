@@ -1,16 +1,22 @@
 name: Integration Tests
 
-on: [push]
+on:
+  push:
+    branches:
+      - '**'
 
 jobs:
   build:
     name: Build, test, and publish results
     runs-on: ubuntu-latest
     steps:
+
+# SETUP BUILD ENVIRONMENT
     - id: checkout-code
       name: Checkout code
       uses: actions/checkout@v1
-    - name: Set up JDK 1.8
+    - id: setup-jdk
+      name: Set up JDK
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
@@ -26,6 +32,9 @@ jobs:
         echo github.ref: ${{ github.head_ref || github.ref }}
         echo github.sha: ${{ github.sha }}
         mvn -v
+        cat ~/.m2/settings.xml
+
+# BUILD AND TEST
     - id: build-test
       name: Build and run integration tests
       env:
@@ -37,8 +46,11 @@ jobs:
           -Dtestcoverage \
           clean install \
           org.jacoco:jacoco-maven-plugin:0.8.5:report-aggregate
-    - id: publish-results
+
+# GET TEST RESULTS
+    - id: publish-test-results
       name: Upload results and coverage
+      if: contains(github.ref, 'master')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
