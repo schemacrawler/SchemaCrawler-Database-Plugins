@@ -28,6 +28,8 @@ jobs:
       run: |
         sudo apt-get -qq update
         sudo apt-get -q install graphviz
+        sudo apt-get -q install apt-transport-https ca-certificates \
+          curl software-properties-common
     - id: show-environment
       name: Show environment
       run: |
