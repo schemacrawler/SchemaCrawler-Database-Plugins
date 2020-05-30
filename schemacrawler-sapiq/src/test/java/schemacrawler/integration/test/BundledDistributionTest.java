@@ -42,7 +42,7 @@ public class BundledDistributionTest
 {
 
   @Test
-  public void testContextrmationSchema_sapiq()
+  public void testInformationSchema_sapiq()
     throws Exception
   {
 
