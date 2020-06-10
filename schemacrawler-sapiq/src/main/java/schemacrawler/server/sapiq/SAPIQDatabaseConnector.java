@@ -30,11 +30,9 @@ package schemacrawler.server.sapiq;
 
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.function.Predicate;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import schemacrawler.tools.iosource.ClasspathInputResource;
@@ -50,15 +48,6 @@ public final class SAPIQDatabaseConnector
           new ClasspathInputResource("/schemacrawler-sapiq.config.properties"),
           (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
             "/sapiq.information_schema"));
-  }
-
-  @Override
-  public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
-  {
-    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder =
-      super.getSchemaRetrievalOptionsBuilder(connection);
-    schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
-    return schemaRetrievalOptionsBuilder;
   }
 
   @Override
