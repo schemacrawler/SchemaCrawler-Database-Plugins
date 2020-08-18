@@ -35,7 +35,7 @@ import java.util.function.Predicate;
 import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
-import schemacrawler.tools.iosource.ClasspathInputResource;
+import us.fatehi.utility.ioresource.ClasspathInputResource;
 
 public final class SAPIQDatabaseConnector
   extends DatabaseConnector

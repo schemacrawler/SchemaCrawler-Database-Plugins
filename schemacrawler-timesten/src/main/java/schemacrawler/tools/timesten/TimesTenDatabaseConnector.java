@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
-import schemacrawler.tools.iosource.ClasspathInputResource;
+import us.fatehi.utility.ioresource.ClasspathInputResource;
 
 public final class TimesTenDatabaseConnector
   extends DatabaseConnector
