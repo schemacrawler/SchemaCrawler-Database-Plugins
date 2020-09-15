@@ -30,15 +30,12 @@ package schemacrawler.tools.timesten;
 
 
 import java.io.IOException;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
-
 import schemacrawler.schemacrawler.DatabaseServerType;
+import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
-import us.fatehi.utility.ioresource.ClasspathInputResource;
 
 public final class TimesTenDatabaseConnector
   extends DatabaseConnector
@@ -51,9 +48,14 @@ public final class TimesTenDatabaseConnector
     throws IOException
   {
     super(new DatabaseServerType("timesten", "Oracle TimesTen"),
-          new ClasspathInputResource("/schemacrawler-timesten.config.properties"),
+          url -> url != null && url.startsWith("jdbc:timesten:"),
           (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
-            "/timesten.information_schema"));
+            "/timesten.information_schema"),
+          (schemaRetrievalOptionsBuilder, connection) -> {},
+          (limitOptionsBuilder) -> {},
+          () -> DatabaseConnectionUrlBuilder.builder(
+              "jdbc:timesten:client:dsn=${database};TTC_SERVER=${host};TCP_PORT=${port};")
+              .withDefaultPort(53397));
     LOGGER.log(Level.INFO, "Loaded commandline for Oracle TimesTen");
   }
 
@@ -75,11 +77,5 @@ public final class TimesTenDatabaseConnector
       .addOption("database", "DSN name", String.class);
     return pluginCommand;
   }
-
-  @Override
-  protected Predicate<String> supportsUrlPredicate()
-  {
-    return url -> Pattern.matches("jdbc:timesten:.*", url);
-  }
-
+  
 }

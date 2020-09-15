@@ -30,12 +30,10 @@ package schemacrawler.server.sapiq;
 
 
 import java.io.IOException;
-import java.util.function.Predicate;
-
 import schemacrawler.schemacrawler.DatabaseServerType;
+import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
-import us.fatehi.utility.ioresource.ClasspathInputResource;
 
 public final class SAPIQDatabaseConnector
   extends DatabaseConnector
@@ -45,9 +43,14 @@ public final class SAPIQDatabaseConnector
     throws IOException
   {
     super(new DatabaseServerType("sapiq", "SAP IQ"),
-          new ClasspathInputResource("/schemacrawler-sapiq.config.properties"),
+          url -> true,
           (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
-            "/sapiq.information_schema"));
+            "/sapiq.information_schema"),
+          (schemaRetrievalOptionsBuilder, connection) -> {},
+          (limitOptionsBuilder) -> {},
+          () -> DatabaseConnectionUrlBuilder.builder(
+              "jdbc:sybase:Tds:${host}:${port}")
+              .withDefaultPort(50000));
   }
 
   @Override
@@ -67,12 +70,5 @@ public final class SAPIQDatabaseConnector
       .addOption("database", "Database name", String.class);
     return pluginCommand;
   }
-
-  @Override
-  protected Predicate<String> supportsUrlPredicate()
-  {
-    // Do not specify a value here as it conflicts with SAP ASE
-    return url -> true;
-  }
-
+  
 }

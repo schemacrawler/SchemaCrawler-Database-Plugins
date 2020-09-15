@@ -30,14 +30,10 @@ package schemacrawler.server.sapiq;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.function.Predicate;
-
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.schemacrawler.SchemaRetrievalOptionsBuilder;
+import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
-import us.fatehi.utility.ioresource.ClasspathInputResource;
 
 public final class SAPIQOdbcDatabaseConnector
   extends DatabaseConnector
@@ -47,19 +43,14 @@ public final class SAPIQOdbcDatabaseConnector
     throws IOException
   {
     super(new DatabaseServerType("sapiq", "SAP IQ"),
-          new ClasspathInputResource("/schemacrawler-sapiq.config.properties"),
+          url -> true,
           (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
-            "/sapiqodbc.information_schema"));
-  }
-
-  @Override
-  public SchemaRetrievalOptionsBuilder getSchemaRetrievalOptionsBuilder(final Connection connection)
-  {
-    final SchemaRetrievalOptionsBuilder schemaRetrievalOptionsBuilder =
-      super.getSchemaRetrievalOptionsBuilder(connection);
-    // Unlike the regular JDBC driver, catalogs are not supported
-    schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs();
-    return schemaRetrievalOptionsBuilder;
+            "/sapiqodbc.information_schema"),
+          (schemaRetrievalOptionsBuilder, connection) -> schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs(),
+          (limitOptionsBuilder) -> {},
+          () -> DatabaseConnectionUrlBuilder.builder(
+              "jdbc:sybase:Tds:${host}:${port}")
+              .withDefaultPort(50000));
   }
 
   @Override
@@ -79,10 +70,5 @@ public final class SAPIQOdbcDatabaseConnector
       .addOption("database", "Database name", String.class);
     return pluginCommand;
   }
-
-  @Override
-  protected Predicate<String> supportsUrlPredicate()
-  {
-    return url -> true;
-  }
+  
 }
