@@ -65,16 +65,16 @@ public final class TimesTenDatabaseConnector
     final PluginCommand pluginCommand = super.getHelpCommand();
     pluginCommand
       .addOption("server",
+                 String.class,
                  "--server=timesten%n"
-                 + "Loads SchemaCrawler plug-in for Oracle TimesTen",
-                 String.class)
+         + "Loads SchemaCrawler plug-in for Oracle TimesTen")
       .addOption("host",
-                 "Host name%n" + "Optional, defaults to localhost",
-                 String.class)
+                 String.class,
+                 "Host name%n" + "Optional, defaults to localhost")
       .addOption("port",
-                 "Port number%n" + "Optional, defaults to 53397",
-                 Integer.class)
-      .addOption("database", "DSN name", String.class);
+                 Integer.class,
+                 "Port number%n" + "Optional, defaults to 53397")
+      .addOption("database", String.class, "DSN name");
     return pluginCommand;
   }
   
