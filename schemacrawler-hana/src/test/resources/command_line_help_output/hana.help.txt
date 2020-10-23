@@ -1,0 +1,12 @@
+** Connect to SAP HANA
+
+      --database=<database>
+                          Database name
+      --host=<host>       Host name
+                          Optional, defaults to localhost
+      --port=<port>       Port number
+                          Optional, defaults to 30015
+      --server=<server>   --server=hana
+                          Loads SchemaCrawler plug-in for SAP HANA
+
+

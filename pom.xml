@@ -20,5 +20,6 @@
   <modules>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
+    <module>schemacrawler-hana</module>
   </modules>
 </project>
