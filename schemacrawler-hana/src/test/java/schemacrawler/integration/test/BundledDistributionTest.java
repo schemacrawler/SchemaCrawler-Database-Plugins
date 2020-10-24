@@ -28,23 +28,37 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.integration.test;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+import java.sql.Connection;
+
 import org.junit.jupiter.api.Test;
+
+import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
-public class BundledDistributionTest
-{
+public class BundledDistributionTest {
 
   @Test
-  public void testPlugin_hana()
-    throws Exception
-  {
+  public void testInformationSchema_hana() throws Exception {
+    final Connection connection = null;
     final DatabaseConnectorRegistry registry =
-      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    assertThat(registry.hasDatabaseSystemIdentifier("hana"), is(true));
+        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    final DatabaseConnector databaseSystemIdentifier = registry.lookupDatabaseConnector("hana");
+    assertThat(
+        databaseSystemIdentifier
+            .getSchemaRetrievalOptionsBuilder(connection)
+            .toOptions()
+            .getInformationSchemaViews()
+            .size(),
+        is(11));
   }
 
+  @Test
+  public void testPlugin_hana() throws Exception {
+    final DatabaseConnectorRegistry registry =
+        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+    assertThat(registry.hasDatabaseSystemIdentifier("hana"), is(true));
+  }
 }
