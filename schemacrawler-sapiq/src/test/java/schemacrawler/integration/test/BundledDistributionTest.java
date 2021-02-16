@@ -50,7 +50,7 @@ public class BundledDistributionTest
     final DatabaseConnectorRegistry registry =
       DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     final DatabaseConnector dbConnector =
-      registry.lookupDatabaseConnector("sapiq");
+      registry.findDatabaseConnectorFromDatabaseSystemIdentifier("sapiq");
     assertThat(dbConnector
                  .getSchemaRetrievalOptionsBuilder(connection)
                  .toOptions()

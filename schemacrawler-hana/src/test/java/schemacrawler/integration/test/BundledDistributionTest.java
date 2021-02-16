@@ -45,7 +45,7 @@ public class BundledDistributionTest {
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    final DatabaseConnector databaseSystemIdentifier = registry.lookupDatabaseConnector("hana");
+    final DatabaseConnector databaseSystemIdentifier = registry.findDatabaseConnectorFromDatabaseSystemIdentifier("hana");
     assertThat(
         databaseSystemIdentifier
             .getSchemaRetrievalOptionsBuilder(connection)

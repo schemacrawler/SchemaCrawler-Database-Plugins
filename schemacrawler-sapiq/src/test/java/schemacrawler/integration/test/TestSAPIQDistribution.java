@@ -51,7 +51,7 @@ public class TestSAPIQDistribution
   {
     final DatabaseConnectorRegistry registry =
       DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    dbConnector = registry.lookupDatabaseConnector("sapiq");
+    dbConnector = registry.findDatabaseConnectorFromDatabaseSystemIdentifier("sapiq");
   }
 
   @Test
