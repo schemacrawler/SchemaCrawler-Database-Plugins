@@ -28,7 +28,6 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.tools.hive;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +40,7 @@ public final class HiveDatabaseConnector extends DatabaseConnector {
 
   private static final Logger LOGGER = Logger.getLogger(HiveDatabaseConnector.class.getName());
 
-  public HiveDatabaseConnector() throws IOException {
+  public HiveDatabaseConnector() throws Exception {
     super(
         new DatabaseServerType("hive", "Apache Hive"),
         url -> url != null && url.startsWith("jdbc:hive2:"),
@@ -50,7 +49,10 @@ public final class HiveDatabaseConnector extends DatabaseConnector {
         limitOptionsBuilder -> {},
         () ->
             DatabaseConnectionUrlBuilder.builder("jdbc:hive2://${host}:${port}/${database}")
-                .withDefaultPort(30015));
+                .withDefaultPort(10000));
+
+    Class.forName("org.apache.hive.jdbc.HiveDriver");
+
     LOGGER.log(Level.INFO, "Loaded commandline for Apache Hive");
   }
 
