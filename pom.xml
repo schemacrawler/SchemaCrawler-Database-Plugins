@@ -21,6 +21,5 @@
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
-	<module>schemacrawler-hive</module>
   </modules>
 </project>
