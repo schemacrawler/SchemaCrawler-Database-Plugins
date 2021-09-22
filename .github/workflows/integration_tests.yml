@@ -15,13 +15,6 @@ jobs:
     - id: prepare-maven-build
       name: Prepare Maven build
       uses: sualeh/prepare-maven-build@v0.0.3
-    - id: install-packages
-      name: Install packages
-      run: |
-        # Install Graphviz
-        sudo apt-get -qq update
-        sudo apt-get -q install graphviz
-        dot -V
 
 # BUILD AND TEST
     - id: build-test
