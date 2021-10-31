@@ -1,5 +1,5 @@
 ![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/workflows/Integration%20Tests/badge.svg)
-[![codecov](https://app.codecov.io/gh/schemacrawler/SchemaCrawler/branch/master/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
+[![codecov](https://codecov.io/gh/schemacrawler/SchemaCrawler/branch/master/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://search.maven.org/search?q=g:us.fatehi%20schemacrawler*)
 
 
