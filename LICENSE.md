@@ -1,1 +1,1 @@
-[License](http://www.SchemaCrawler.com/license.html)
+[License](https://www.SchemaCrawler.com/license.html)
