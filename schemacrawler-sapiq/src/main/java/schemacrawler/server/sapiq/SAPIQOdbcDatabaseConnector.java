@@ -28,47 +28,36 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.server.sapiq;
 
-
-import java.io.IOException;
 import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 
-public final class SAPIQOdbcDatabaseConnector
-  extends DatabaseConnector
-{
+public final class SAPIQOdbcDatabaseConnector extends DatabaseConnector {
 
-  public SAPIQOdbcDatabaseConnector()
-    throws IOException
-  {
-    super(new DatabaseServerType("sapiq", "SAP IQ"),
-          url -> true,
-          (informationSchemaViewsBuilder, connection) -> informationSchemaViewsBuilder.fromResourceFolder(
-            "/sapiqodbc.information_schema"),
-          (schemaRetrievalOptionsBuilder, connection) -> schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs(),
-          (limitOptionsBuilder) -> {},
-          () -> DatabaseConnectionUrlBuilder.builder(
-              "jdbc:sybase:Tds:${host}:${port}")
-              .withDefaultPort(50000));
+  public SAPIQOdbcDatabaseConnector() {
+    super(
+        new DatabaseServerType("sapiq", "SAP IQ"),
+        url -> true,
+        (informationSchemaViewsBuilder, connection) ->
+            informationSchemaViewsBuilder.fromResourceFolder("/sapiqodbc.information_schema"),
+        (schemaRetrievalOptionsBuilder, connection) ->
+            schemaRetrievalOptionsBuilder.withDoesNotSupportCatalogs(),
+        limitOptionsBuilder -> {},
+        () ->
+            DatabaseConnectionUrlBuilder.builder("jdbc:sybase:Tds:${host}:${port}")
+                .withDefaultPort(50000));
   }
 
   @Override
-  public PluginCommand getHelpCommand()
-  {
+  public PluginCommand getHelpCommand() {
     final PluginCommand pluginCommand = super.getHelpCommand();
     pluginCommand
-      .addOption("server",
-                 String.class,
-                 "--server=sqpiq%n" + "Loads SchemaCrawler plug-in for SAP IQ")
-      .addOption("host",
-                 String.class,
-                 "Host name%n" + "Optional, defaults to localhost")
-      .addOption("port",
-                 Integer.class,
-                 "Port number%n" + "Optional, defaults to 50000")
-      .addOption("database", String.class, "Database name");
+        .addOption(
+            "server", String.class, "--server=sqpiq%n" + "Loads SchemaCrawler plug-in for SAP IQ")
+        .addOption("host", String.class, "Host name%n" + "Optional, defaults to localhost")
+        .addOption("port", Integer.class, "Port number%n" + "Optional, defaults to 50000")
+        .addOption("database", String.class, "Database name");
     return pluginCommand;
   }
-  
 }

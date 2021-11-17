@@ -28,7 +28,6 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.tools.hana;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,14 +40,14 @@ public final class HanaDatabaseConnector extends DatabaseConnector {
 
   private static final Logger LOGGER = Logger.getLogger(HanaDatabaseConnector.class.getName());
 
-  public HanaDatabaseConnector() throws IOException {
+  public HanaDatabaseConnector() {
     super(
         new DatabaseServerType("hana", "SAP HANA"),
         url -> url != null && url.startsWith("jdbc:sap:"),
         (informationSchemaViewsBuilder, connection) ->
             informationSchemaViewsBuilder.fromResourceFolder("/hana.information_schema"),
         (schemaRetrievalOptionsBuilder, connection) -> {},
-        (limitOptionsBuilder) -> {},
+        limitOptionsBuilder -> {},
         () ->
             DatabaseConnectionUrlBuilder.builder(
                     "jdbc:sap://${host}:${port}/?databaseName=${database}")

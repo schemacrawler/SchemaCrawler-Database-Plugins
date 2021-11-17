@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>16.15.11</version>
+    <version>16.16.02</version>
   </parent>
   <artifactId>schemacrawler-timesten</artifactId>
   <packaging>jar</packaging>
@@ -21,6 +21,7 @@
       <groupId>us.fatehi</groupId>
       <artifactId>schemacrawler-commandline</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
