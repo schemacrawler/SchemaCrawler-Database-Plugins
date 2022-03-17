@@ -2,10 +2,6 @@
 
       --database=<database>
                           Virtual database name
-      --host=<host>       Host name
-                          Unused
-      --port=<port>       Port number
-                          Unused
       --server=<server>   --server=teiid
                           Loads SchemaCrawler plug-in for Teiid
 

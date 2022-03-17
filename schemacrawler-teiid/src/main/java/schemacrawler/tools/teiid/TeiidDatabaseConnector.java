@@ -45,9 +45,12 @@ public final class TeiidDatabaseConnector extends DatabaseConnector {
         new DatabaseServerType("teiid", "Teiid"),
         url -> url != null && url.startsWith("jdbc:teiid:"),
         (informationSchemaViewsBuilder, connection) -> {},
-        (schemaRetrievalOptionsBuilder, connection) -> {},
+        (schemaRetrievalOptionsBuilder, connection) ->
+            schemaRetrievalOptionsBuilder.withSupportsCatalogs().withSupportsSchemas(),
         limitOptionsBuilder -> {},
-        () -> DatabaseConnectionUrlBuilder.builder("jdbc:teiid://${host}:${database}"));
+        () ->
+            DatabaseConnectionUrlBuilder.builder("jdbc:teiid://${host}:${database}")
+                .withDefaultUrlx("ApplicationName", "SchemaCrawler"));
     LOGGER.log(Level.INFO, "Loaded commandline for Teiid");
   }
 
@@ -57,8 +60,6 @@ public final class TeiidDatabaseConnector extends DatabaseConnector {
     pluginCommand
         .addOption(
             "server", String.class, "--server=teiid%n" + "Loads SchemaCrawler plug-in for Teiid")
-        .addOption("host", String.class, "Host name%n" + "Unused")
-        .addOption("port", Integer.class, "Port number%n" + "Unused")
         .addOption("database", String.class, "Virtual database name");
     return pluginCommand;
   }
