@@ -1,0 +1,8 @@
+** Connect to Teiid
+
+      --database=<database>
+                          Virtual database name
+      --server=<server>   --server=teiid
+                          Loads SchemaCrawler plug-in for Teiid
+
+
