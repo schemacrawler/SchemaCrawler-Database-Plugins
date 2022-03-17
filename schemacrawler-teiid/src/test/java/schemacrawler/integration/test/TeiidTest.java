@@ -66,7 +66,7 @@ public class TeiidTest extends BaseAdditionalDatabaseTest {
 
     final FileManagedConnectionFactory managedconnectionFactory =
         new FileManagedConnectionFactory();
-    managedconnectionFactory.setParentDirectory("src/main/resources/teiid-vdb");
+    managedconnectionFactory.setParentDirectory("src/test/resources/teiid-vdb");
     server.addConnectionFactory(
         "java:/marketdata-price-file", managedconnectionFactory.createConnectionFactory());
 
@@ -77,6 +77,22 @@ public class TeiidTest extends BaseAdditionalDatabaseTest {
         TeiidTest.class.getClassLoader().getResourceAsStream("teiid-vdb/stock-market-vdb.xml"));
 
     connection = server.getDriver().connect("jdbc:teiid:StockMarket", null);
+  }
+
+  @Test
+  public void testTeiidDump() throws Exception {
+
+    final SchemaTextOptionsBuilder textOptionsBuilder = SchemaTextOptionsBuilder.builder();
+    textOptionsBuilder.noInfo();
+    final SchemaTextOptions textOptions = textOptionsBuilder.toOptions();
+
+    final SchemaCrawlerExecutable executable = new SchemaCrawlerExecutable("dump");
+    executable.setAdditionalConfiguration(SchemaTextOptionsBuilder.builder(textOptions).toConfig());
+
+    final String expectedResource = "testTeiidDump.txt";
+    assertThat(
+        outputOf(executableExecution(connection, executable)),
+        hasSameContentAs(classpathResource(expectedResource)));
   }
 
   @Test
