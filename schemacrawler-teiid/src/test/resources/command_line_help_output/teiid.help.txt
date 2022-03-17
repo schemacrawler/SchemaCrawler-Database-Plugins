@@ -1,0 +1,12 @@
+** Connect to Teiid
+
+      --database=<database>
+                          Virtual database name
+      --host=<host>       Host name
+                          Unused
+      --port=<port>       Port number
+                          Unused
+      --server=<server>   --server=hana
+                          Loads SchemaCrawler plug-in for Teiid
+
+
