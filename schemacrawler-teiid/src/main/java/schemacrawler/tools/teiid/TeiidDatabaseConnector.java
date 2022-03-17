@@ -56,7 +56,7 @@ public final class TeiidDatabaseConnector extends DatabaseConnector {
     final PluginCommand pluginCommand = super.getHelpCommand();
     pluginCommand
         .addOption(
-            "server", String.class, "--server=hana%n" + "Loads SchemaCrawler plug-in for Teiid")
+            "server", String.class, "--server=teiid%n" + "Loads SchemaCrawler plug-in for Teiid")
         .addOption("host", String.class, "Host name%n" + "Unused")
         .addOption("port", Integer.class, "Port number%n" + "Unused")
         .addOption("database", String.class, "Virtual database name");

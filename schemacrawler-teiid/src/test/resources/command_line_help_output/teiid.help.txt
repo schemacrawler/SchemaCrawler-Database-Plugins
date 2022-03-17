@@ -6,7 +6,7 @@
                           Unused
       --port=<port>       Port number
                           Unused
-      --server=<server>   --server=hana
+      --server=<server>   --server=teiid
                           Loads SchemaCrawler plug-in for Teiid
 
 
