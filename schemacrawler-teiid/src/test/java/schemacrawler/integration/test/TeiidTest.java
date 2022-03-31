@@ -35,13 +35,19 @@ import static schemacrawler.test.utility.FileHasContent.outputOf;
 import static schemacrawler.test.utility.TestUtility.javaVersion;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.hsqldb.jdbc.JDBCDataSource;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.teiid.resource.adapter.file.FileManagedConnectionFactory;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.teiid.adminapi.impl.ModelMetaData;
 import org.teiid.runtime.EmbeddedConfiguration;
 import org.teiid.runtime.EmbeddedServer;
-import org.teiid.translator.file.FileExecutionFactory;
+import org.teiid.translator.jdbc.hsql.HsqlExecutionFactory;
 
 import schemacrawler.schemacrawler.LoadOptionsBuilder;
 import schemacrawler.schemacrawler.SchemaCrawlerOptions;
@@ -52,31 +58,53 @@ import schemacrawler.tools.command.text.schema.options.SchemaTextOptions;
 import schemacrawler.tools.command.text.schema.options.SchemaTextOptionsBuilder;
 import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TeiidTest extends BaseAdditionalDatabaseTest {
 
   private Connection connection;
 
-  @BeforeEach
+  @BeforeAll
   public void createDatabase() throws Exception {
+
+    final Properties props = System.getProperties();
+    props.setProperty(
+        "org.teiid.translator.jdbc.useFullSchemaNameDefault", Boolean.FALSE.toString());
+
     final EmbeddedServer server = new EmbeddedServer();
-
-    final FileExecutionFactory fileExecutionFactory = new FileExecutionFactory();
-    fileExecutionFactory.start();
-    server.addTranslator("file", fileExecutionFactory);
-
-    final FileManagedConnectionFactory managedconnectionFactory =
-        new FileManagedConnectionFactory();
-    managedconnectionFactory.setParentDirectory("src/test/resources/teiid-vdb");
-    server.addConnectionFactory(
-        "java:/marketdata-price-file", managedconnectionFactory.createConnectionFactory());
-
     final EmbeddedConfiguration config = new EmbeddedConfiguration();
+
+    config.setUseDisk(false);
     server.start(config);
 
-    server.deployVDB(
-        TeiidTest.class.getClassLoader().getResourceAsStream("teiid-vdb/stock-market-vdb.xml"));
+    final JDBCDataSource hsqlDataSource = new JDBCDataSource();
+    hsqlDataSource.setDatabase("jdbc:hsqldb:mem:test");
+    createTestDatabase(hsqlDataSource.getConnection());
+    server.addConnectionFactory("java:/hsql", hsqlDataSource);
 
-    connection = server.getDriver().connect("jdbc:teiid:StockMarket", null);
+    final HsqlExecutionFactory hsqlExecutionFactory = new HsqlExecutionFactory();
+    hsqlExecutionFactory.start();
+    server.addTranslator("hsql-translator", hsqlExecutionFactory);
+
+    final ModelMetaData hsqldbModel = new ModelMetaData();
+    hsqldbModel.setName("HSQLDB");
+    hsqldbModel.addSourceMapping("HSQLDB", "hsql-translator", "java:/hsql");
+    hsqldbModel.addProperty("importer.schemaPattern", "PUBLIC");
+    hsqldbModel.addProperty("importer.tableTypes", "TABLE");
+
+    final ModelMetaData virtualModel = new ModelMetaData();
+    virtualModel.setName("VIRTUAL");
+    virtualModel.setModelType("VIRTUAL");
+    virtualModel.addSourceMetadata(
+        "DDL",
+        "CREATE VIEW REGISTERED_USERS "
+            + "("
+            + " FIRST_NAME VARCHAR(255), "
+            + " LAST_NAME VARCHAR(255)"
+            + ") AS SELECT FIRST_NAME, LAST_NAME FROM REGISTRATION");
+
+    server.deployVDB("TEEID_VDB", hsqldbModel, virtualModel);
+
+    connection = server.getDriver().connect("jdbc:teiid:TEEID_VDB", null);
   }
 
   @Test
@@ -115,5 +143,20 @@ public class TeiidTest extends BaseAdditionalDatabaseTest {
     assertThat(
         outputOf(executableExecution(connection, executable)),
         hasSameContentAs(classpathResource(expectedResource)));
+  }
+
+  private void createTestDatabase(final Connection connection) throws SQLException {
+    try (final Statement stmt = connection.createStatement()) {
+      stmt.executeUpdate(
+          "CREATE TABLE REGISTRATION "
+              + "("
+              + " ID INTEGER IDENTITY PRIMARY KEY, "
+              + " FIRST_NAME VARCHAR(255), "
+              + " LAST_NAME VARCHAR(255), "
+              + " AGE INTEGER"
+              + ")");
+      stmt.executeUpdate(
+          "INSERT INTO REGISTRATION(FIRST_NAME, LAST_NAME, AGE) VALUES('Sualeh', 'Fatehi', 42)");
+    }
   }
 }

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="https://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://maven.apache.org/POM/4.0.0" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>us.fatehi</groupId>
@@ -48,13 +46,7 @@
     </dependency>
     <dependency>
       <groupId>org.teiid.connectors</groupId>
-      <artifactId>translator-file</artifactId>
-      <version>16.0.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.teiid.wildfly.connectors</groupId>
-      <artifactId>connector-file</artifactId>
+      <artifactId>translator-jdbc</artifactId>
       <version>16.0.0</version>
       <scope>test</scope>
     </dependency>
