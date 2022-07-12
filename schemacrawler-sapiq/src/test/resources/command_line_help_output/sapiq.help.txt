@@ -8,5 +8,6 @@
                           Optional, defaults to 50000
       --server=<server>   --server=sqpiq
                           Loads SchemaCrawler plug-in for SAP IQ
+Add connection options to the `connect` command in the SchemaCrawler Shell
 
 

@@ -8,5 +8,6 @@
                           Optional, defaults to 53397
       --server=<server>   --server=timesten
                           Loads SchemaCrawler plug-in for Oracle TimesTen
+Add connection options to the `connect` command in the SchemaCrawler Shell
 
 

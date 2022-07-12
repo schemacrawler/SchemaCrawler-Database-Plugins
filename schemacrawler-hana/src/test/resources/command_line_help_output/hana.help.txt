@@ -8,5 +8,6 @@
                           Optional, defaults to 30015
       --server=<server>   --server=hana
                           Loads SchemaCrawler plug-in for SAP HANA
+Add connection options to the `connect` command in the SchemaCrawler Shell
 
 
