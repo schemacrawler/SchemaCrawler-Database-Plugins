@@ -33,9 +33,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
+import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 
 public final class TimesTenDatabaseConnector
   extends DatabaseConnector
@@ -53,7 +53,7 @@ public final class TimesTenDatabaseConnector
             "/timesten.information_schema"),
           (schemaRetrievalOptionsBuilder, connection) -> {},
           (limitOptionsBuilder) -> {},
-          () -> DatabaseConnectionUrlBuilder.builder(
+          () -> DatabaseConnectionSourceBuilder.builder(
               "jdbc:timesten:client:dsn=${database};TTC_SERVER=${host};TCP_PORT=${port};")
               .withDefaultPort(53397));
     LOGGER.log(Level.INFO, "Loaded commandline for Oracle TimesTen");

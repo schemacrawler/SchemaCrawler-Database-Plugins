@@ -32,9 +32,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
+import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 
 public final class HanaDatabaseConnector extends DatabaseConnector {
 
@@ -49,7 +49,7 @@ public final class HanaDatabaseConnector extends DatabaseConnector {
         (schemaRetrievalOptionsBuilder, connection) -> {},
         limitOptionsBuilder -> {},
         () ->
-            DatabaseConnectionUrlBuilder.builder(
+            DatabaseConnectionSourceBuilder.builder(
                     "jdbc:sap://${host}:${port}/?databaseName=${database}")
                 .withDefaultPort(30015));
     LOGGER.log(Level.INFO, "Loaded commandline for SAP HANA");

@@ -32,9 +32,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
+import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 
 public final class TeiidDatabaseConnector extends DatabaseConnector {
 
@@ -49,7 +49,7 @@ public final class TeiidDatabaseConnector extends DatabaseConnector {
             schemaRetrievalOptionsBuilder.withSupportsCatalogs().withSupportsSchemas(),
         limitOptionsBuilder -> {},
         () ->
-            DatabaseConnectionUrlBuilder.builder("jdbc:teiid://${host}:${database}")
+            DatabaseConnectionSourceBuilder.builder("jdbc:teiid://${host}:${database}")
                 .withDefaultUrlx("ApplicationName", "SchemaCrawler"));
     LOGGER.log(Level.INFO, "Loaded commandline for Teiid");
   }

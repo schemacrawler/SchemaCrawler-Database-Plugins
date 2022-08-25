@@ -29,9 +29,9 @@ http://www.gnu.org/licenses/
 package schemacrawler.server.sapiq;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
-import schemacrawler.tools.databaseconnector.DatabaseConnectionUrlBuilder;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
+import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 
 public final class SAPIQDatabaseConnector extends DatabaseConnector {
 
@@ -44,7 +44,7 @@ public final class SAPIQDatabaseConnector extends DatabaseConnector {
         (schemaRetrievalOptionsBuilder, connection) -> {},
         limitOptionsBuilder -> {},
         () ->
-            DatabaseConnectionUrlBuilder.builder("jdbc:sybase:Tds:${host}:${port}")
+            DatabaseConnectionSourceBuilder.builder("jdbc:sybase:Tds:${host}:${port}")
                 .withDefaultPort(50000));
   }
 
