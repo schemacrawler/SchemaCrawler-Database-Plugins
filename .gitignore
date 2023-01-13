@@ -60,3 +60,4 @@ __init__.py
 
 /schemacrawler-scripting/serialize.*
 **/HiveExample.java
+tree.txt
