@@ -40,7 +40,7 @@
     <dependency>
       <groupId>io.trino</groupId>
       <artifactId>trino-jdbc</artifactId>
-      <version>405</version>
+      <version>406</version>
     </dependency>
 
     <dependency>
