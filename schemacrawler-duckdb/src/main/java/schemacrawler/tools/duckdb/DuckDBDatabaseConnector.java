@@ -28,6 +28,9 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.tools.duckdb;
 
+import static schemacrawler.schemacrawler.MetadataRetrievalStrategy.data_dictionary_all;
+import static schemacrawler.schemacrawler.SchemaInfoMetadataRetrievalStrategy.primaryKeysRetrievalStrategy;
+
 import java.util.logging.Logger;
 
 import schemacrawler.schemacrawler.DatabaseServerType;
@@ -46,7 +49,9 @@ public final class DuckDBDatabaseConnector extends DatabaseConnector {
         (informationSchemaViewsBuilder, connection) ->
             informationSchemaViewsBuilder.fromResourceFolder("/duckdb.information_schema"),
         (schemaRetrievalOptionsBuilder, connection) ->
-            schemaRetrievalOptionsBuilder.withIdentifierQuoteString("\""),
+            schemaRetrievalOptionsBuilder
+                .withIdentifierQuoteString("\"")
+                .with(primaryKeysRetrievalStrategy, data_dictionary_all),
         limitOptionsBuilder -> {},
         () -> DatabaseConnectionSourceBuilder.builder("jdbc:duckdb:${database}"));
   }
