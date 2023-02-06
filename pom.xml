@@ -21,8 +21,9 @@
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
-	<module>schemacrawler-teiid</module>
-	<module>schemacrawler-trino</module>
-	<module>schemacrawler-cassandra</module>
+    <module>schemacrawler-teiid</module>
+    <module>schemacrawler-trino</module>
+    <module>schemacrawler-cassandra</module>
+    <module>schemacrawler-duckdb</module>
   </modules>
 </project>
