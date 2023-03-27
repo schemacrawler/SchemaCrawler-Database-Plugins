@@ -1,11 +1,17 @@
 name: Create Release
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - '*'
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
+      - v[0-9]+.[0-9]+.[0-9]+-[A-Z]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -17,11 +23,15 @@ jobs:
     - id: prepare-maven-build
       name: Prepare Maven build
       uses: sualeh/prepare-maven-build@v1.3.3
+      with:
+        java-version: 8
 
 # BUILD FOR DISTRIBUTION
     - id: build
       name: Build and test for distribution
+      shell: bash
       run: |
+        # Build
         mvn \
           --no-transfer-progress \
           --batch-mode \
@@ -45,17 +55,24 @@ jobs:
 # PUBLISH TO CENTRAL REPOSITORY
     - id: install-secret-key
       name: Install secret key
+      if: startsWith(github.ref, 'refs/tags/')
       # Note: OSSRH_GPG_SECRET_KEY is exported using gpg --export-secret-keys -a <keyid>
       # and has newlines substituted with a literal \n
+      shell: bash
       run: |
+        # Install secret key
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
         gpg --list-secret-keys --keyid-format LONG
     - id: publish-to-central
       name: Publish to Central Repository
+      if: startsWith(github.ref, 'refs/tags/')
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+      shell: bash
       run: |
+        # Publish to Central Repository
+        export GPG_TTY=$(tty)
         mvn \
           --no-transfer-progress \
           --batch-mode \

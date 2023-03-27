@@ -1,13 +1,20 @@
 name: Integration Tests
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - '**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
 jobs:
   build:
-    name: Build, test, and publish results
+    name: Integration Tests
     runs-on: ubuntu-latest
     steps:
 
@@ -15,19 +22,23 @@ jobs:
     - id: prepare-maven-build
       name: Prepare Maven build
       uses: sualeh/prepare-maven-build@v1.3.3
+      with:
+        java-version: 8
 
 # BUILD AND TEST
     - id: build-test
-      name: Build and run integration tests
+      name: Build and run database integration tests
       env:
         TZ: GMT
+      shell: bash
       run: |
+        # Build
         mvn \
           --no-transfer-progress \
           --batch-mode \
           -Dtestcoverage \
           clean install \
-          org.jacoco:jacoco-maven-plugin:0.8.5:report-aggregate
+          org.jacoco:jacoco-maven-plugin:0.8.8:report-aggregate
 
 # GET TEST RESULTS
     - id: publish-test-results
@@ -35,5 +46,13 @@ jobs:
       if: contains(github.ref, 'master')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      shell: bash
       run: |
+        # Upload results and coverage
         bash <(curl -s https://codecov.io/bash) -t 9b176264-b1dd-412b-83f4-342720a3c7eb
+    - id: upload-coverage-test-results
+      name: Upload coverage test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-test-results
+        path: ./schemacrawler/target/site/jacoco-aggregate
