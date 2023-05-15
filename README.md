@@ -1,10 +1,10 @@
 ![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/workflows/Integration%20Tests/badge.svg)
-[![codecov](https://codecov.io/gh/schemacrawler/SchemaCrawler/branch/master/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
+[![codecov](https://codecov.io/gh/schemacrawler/SchemaCrawler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://search.maven.org/search?q=g:us.fatehi%20schemacrawler*)
 
 
 
-<img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/master/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" align="right" />
+<img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/main/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" align="right" />
 
 # SchemaCrawler - Additional Database Plugins
 

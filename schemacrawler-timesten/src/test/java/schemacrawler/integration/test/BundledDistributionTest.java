@@ -28,23 +28,18 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.integration.test;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.Test;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
-public class BundledDistributionTest
-{
+public class BundledDistributionTest {
 
   @Test
-  public void testPlugin_timesten()
-    throws Exception
-  {
+  public void testPlugin_timesten() throws Exception {
     final DatabaseConnectorRegistry registry =
-      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("timesten"), is(true));
   }
-
 }

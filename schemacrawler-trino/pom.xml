@@ -40,19 +40,19 @@
     <dependency>
       <groupId>io.trino</groupId>
       <artifactId>trino-jdbc</artifactId>
-      <version>410</version>
+      <version>411</version>
     </dependency>
 
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>1.17.6</version>
+      <version>1.18.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>trino</artifactId>
-      <version>1.17.6</version>
+      <version>1.18.1</version>
       <scope>test</scope>
     </dependency>
     

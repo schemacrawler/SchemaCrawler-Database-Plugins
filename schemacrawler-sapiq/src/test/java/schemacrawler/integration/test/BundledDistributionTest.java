@@ -28,7 +28,6 @@ http://www.gnu.org/licenses/
 
 package schemacrawler.integration.test;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -38,33 +37,29 @@ import org.junit.jupiter.api.Test;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 
-public class BundledDistributionTest
-{
+public class BundledDistributionTest {
 
   @Test
-  public void testInformationSchema_sapiq()
-    throws Exception
-  {
+  public void testInformationSchema_sapiq() throws Exception {
 
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
-      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     final DatabaseConnector dbConnector =
-      registry.findDatabaseConnectorFromDatabaseSystemIdentifier("sapiq");
-    assertThat(dbConnector
-                 .getSchemaRetrievalOptionsBuilder(connection)
-                 .toOptions()
-                 .getInformationSchemaViews()
-                 .size(), is(2));
+        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("sapiq");
+    assertThat(
+        dbConnector
+            .getSchemaRetrievalOptionsBuilder(connection)
+            .toOptions()
+            .getInformationSchemaViews()
+            .size(),
+        is(2));
   }
 
   @Test
-  public void testPlugin_sapiq()
-    throws Exception
-  {
+  public void testPlugin_sapiq() throws Exception {
     final DatabaseConnectorRegistry registry =
-      DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
   }
-
 }
