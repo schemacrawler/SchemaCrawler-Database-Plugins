@@ -34,10 +34,8 @@ import static schemacrawler.test.utility.FileHasContent.classpathResource;
 import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
 import static schemacrawler.test.utility.FileHasContent.outputOf;
 import static schemacrawler.test.utility.TestUtility.javaVersion;
-
 import java.net.InetSocketAddress;
 import java.util.regex.Pattern;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -46,7 +44,6 @@ import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-
 import schemacrawler.schemacrawler.InfoLevel;
 import schemacrawler.schemacrawler.LimitOptionsBuilder;
 import schemacrawler.schemacrawler.LoadOptionsBuilder;
@@ -66,7 +63,7 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
 
   @Container
   private final CassandraContainer<?> dbContainer =
-      new CassandraContainer<>(imageName.withTag("4.1.0"))
+      new CassandraContainer<>(imageName.withTag("5.0"))
           .withInitScript("create-cassandra-database.cql");
 
   @BeforeEach
@@ -79,8 +76,10 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
     final InetSocketAddress contactPoint = dbContainer.getContactPoint();
     final String host = contactPoint.getHostName();
     final int port = contactPoint.getPort();
-    final String keyspace = "store";
-    final String connectionUrl = String.format("jdbc:cassandra://%s:%d/%s", host, port, keyspace);
+    final String keyspace = "books";
+    final String localDatacenter = dbContainer.getLocalDatacenter();
+    final String connectionUrl = String.format("jdbc:cassandra://%s:%d/%s?localdatacenter=%s", host,
+        port, keyspace, localDatacenter);
     System.out.printf("url=%s%n", connectionUrl);
     createDataSource(connectionUrl, dbContainer.getUsername(), dbContainer.getPassword());
   }
@@ -94,10 +93,9 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
         SchemaInfoLevelBuilder.builder().withInfoLevel(InfoLevel.maximum);
     final LoadOptionsBuilder loadOptionsBuilder =
         LoadOptionsBuilder.builder().withSchemaInfoLevelBuilder(schemaInfoLevelBuilder);
-    final SchemaCrawlerOptions schemaCrawlerOptions =
-        SchemaCrawlerOptionsBuilder.newSchemaCrawlerOptions()
-            .withLimitOptions(limitOptionsBuilder.toOptions())
-            .withLoadOptions(loadOptionsBuilder.toOptions());
+    final SchemaCrawlerOptions schemaCrawlerOptions = SchemaCrawlerOptionsBuilder
+        .newSchemaCrawlerOptions().withLimitOptions(limitOptionsBuilder.toOptions())
+        .withLoadOptions(loadOptionsBuilder.toOptions());
     final SchemaTextOptionsBuilder textOptionsBuilder = SchemaTextOptionsBuilder.builder();
     textOptionsBuilder.showDatabaseInfo().showJdbcDriverInfo();
     final SchemaTextOptions textOptions = textOptionsBuilder.toOptions();
@@ -108,8 +106,7 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
 
     final String expectedResource =
         String.format("testCassandraWithConnection.%s.txt", javaVersion());
-    assertThat(
-        outputOf(executableExecution(getDataSource(), executable)),
+    assertThat(outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));
   }
 }

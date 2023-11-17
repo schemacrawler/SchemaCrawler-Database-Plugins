@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>16.20.5</version>
+    <version>16.20.6</version>
   </parent>
   <artifactId>schemacrawler-cassandra</artifactId>
   <packaging>jar</packaging>
@@ -41,7 +41,7 @@
     <dependency>
       <groupId>com.ing.data</groupId>
       <artifactId>cassandra-jdbc-wrapper</artifactId>
-      <version>4.8.0</version>
+      <version>4.10.2</version>
     </dependency>
     
     <dependency>
