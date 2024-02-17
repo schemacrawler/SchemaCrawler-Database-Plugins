@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>16.21.1</version>
+    <version>16.21.2</version>
   </parent>
   <artifactId>schemacrawler-cassandra</artifactId>
   <packaging>jar</packaging>
@@ -47,13 +47,11 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>1.19.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>cassandra</artifactId>
-      <version>1.19.4</version>
       <scope>test</scope>
     </dependency>
     
