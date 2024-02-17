@@ -21,7 +21,7 @@ jobs:
 # SETUP BUILD ENVIRONMENT
     - id: prepare-maven-build
       name: Prepare Maven build
-      uses: sualeh/prepare-maven-build@v1.3.5
+      uses: sualeh/prepare-maven-build@v1.4.0
       with:
         java-version: 8
 
@@ -38,7 +38,7 @@ jobs:
           --batch-mode \
           -Dtestcoverage \
           clean install \
-          org.jacoco:jacoco-maven-plugin:0.8.8:report-aggregate
+          org.jacoco:jacoco-maven-plugin:0.8.11:report-aggregate
 
 # GET TEST RESULTS
     - id: publish-test-results

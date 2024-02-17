@@ -20,7 +20,7 @@ jobs:
 # SETUP BUILD ENVIRONMENT
     - id: prepare-maven-build
       name: Prepare Maven build
-      uses: sualeh/prepare-maven-build@v1.3.5
+      uses: sualeh/prepare-maven-build@v1.4.0
       with:
         java-version: 8
 
@@ -38,17 +38,17 @@ jobs:
 # CREATE GITHUB RELEASE
     - id: create-release
       name: Create GitHub release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body: |
-          SchemaCrawler ${{ github.ref }} release at last commit ${{ github.sha }}
-          See the change history at https://www.schemacrawler.com/changes-report.html
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ github.ref_name }}
         draft: false
         prerelease: false
+        body: |
+          SchemaCrawler ${{ github.event.release.tag_name }} release at last commit ${{ github.sha }}
+          See the change history at https://www.schemacrawler.com/changes-report.html
+        generate_release_notes: true
 
 # PUBLISH TO CENTRAL REPOSITORY
     - id: install-secret-key
