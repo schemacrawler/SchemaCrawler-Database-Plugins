@@ -3,10 +3,7 @@
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://search.maven.org/search?q=g:us.fatehi%20schemacrawler*)
 
 
-
-<img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/main/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" align="right" />
-
-# SchemaCrawler - Additional Database Plugins
+# <img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/main/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" valign="middle"/> SchemaCrawler - Additional Database Plugins
 
 > **Note**: Please see the [SchemaCrawler website](https://www.schemacrawler.com/) for more details.
 
