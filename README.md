@@ -1,6 +1,6 @@
 ![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/workflows/Integration%20Tests/badge.svg)
 [![codecov](https://codecov.io/gh/schemacrawler/SchemaCrawler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
-[![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://search.maven.org/search?q=g:us.fatehi%20schemacrawler*)
+[![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://central.sonatype.com/search?q=us.fatehi.schemacrawler&sort=name)
 
 
 # <img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/main/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" valign="middle"/> SchemaCrawler - Additional Database Plugins
@@ -19,7 +19,7 @@ SchemaCrawler is available under a number of [licenses](https://www.schemacrawle
 
 ## Distributions and Downloads
 
-All SchemaCrawler jars are in the [Central Repository](https://search.maven.org/search?q=g:us.fatehi%20a:schemacrawler*). They can be used as dependencies in [Gradle](https://gradle.org/) or [Apache Maven](https://maven.apache.org/) projects, or with any other build system that supports the Central Repository. 
+All SchemaCrawler jars are in the [Central Repository](https://central.sonatype.com/search?q=us.fatehi.schemacrawler&sort=name). They can be used as dependencies in [Gradle](https://gradle.org/) or [Apache Maven](https://maven.apache.org/) projects, or with any other build system that supports the Central Repository. 
 
 ## Support
 
