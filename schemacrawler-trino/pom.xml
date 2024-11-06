@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://maven.apache.org/POM/4.0.0" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>us.fatehi</groupId>
@@ -10,10 +12,25 @@
   <packaging>jar</packaging>
   <name>SchemaCrawler for Trino</name>
   <dependencies>
+
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-jdbc-drivers</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>us.fatehi</groupId>
       <artifactId>schemacrawler</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-jdbc-drivers</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>us.fatehi</groupId>
@@ -21,7 +38,6 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>us.fatehi</groupId>
       <artifactId>schemacrawler-api</artifactId>
@@ -38,12 +54,6 @@
     </dependency>
 
     <dependency>
-      <groupId>io.trino</groupId>
-      <artifactId>trino-jdbc</artifactId>
-      <version>462</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
@@ -55,6 +65,7 @@
     </dependency>
     
   </dependencies>
+  
   <build>
     <plugins>
       <plugin>
