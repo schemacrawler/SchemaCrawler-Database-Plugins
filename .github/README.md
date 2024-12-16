@@ -1,11 +1,13 @@
-![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/workflows/Integration%20Tests/badge.svg)
-[![codecov](https://codecov.io/gh/schemacrawler/SchemaCrawler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schemacrawler/SchemaCrawler-Database-Plugins)
+<!-- markdownlint-disable MD041 -->
+[![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/actions/workflows/integration-tests.yml)
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://central.sonatype.com/search?q=us.fatehi.schemacrawler&sort=name)
 
 
 # <img src="https://raw.githubusercontent.com/schemacrawler/SchemaCrawler/main/schemacrawler-website/src/site/resources/images/schemacrawler_logo.png" height="100px" width="100px" valign="middle"/> SchemaCrawler - Additional Database Plugins
 
-> **Note**: Please see the [SchemaCrawler website](https://www.schemacrawler.com/) for more details.
+> [!NOTE]  
+> * Please see the [SchemaCrawler website](https://www.schemacrawler.com/) for more details.
+
 
 ## About
 

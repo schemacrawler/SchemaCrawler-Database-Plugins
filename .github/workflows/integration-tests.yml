@@ -3,8 +3,9 @@ name: Integration Tests
 on:
   workflow_dispatch:
   push:
+  pull_request:
     branches:
-      - '**'
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,6 +25,28 @@ jobs:
       uses: sualeh/prepare-maven-build@v1.4.0
       with:
         java-version: 8
+    - id: install-graphviz
+      name: Install Graphviz
+      uses: sualeh/install-graphviz@v1.0.3
+
+# BUILD DEPENDENCIES
+    - id: checkout-schemacrawler
+      name: Checkout SchemaCrawler
+      uses: actions/checkout@v4
+      with:
+        repository: schemacrawler/SchemaCrawler
+        path: SchemaCrawler
+    - id: build-schemacrawler
+      name: Build SchemaCrawler for local Maven repository
+      shell: bash
+      run: |
+        # Build SchemaCrawler
+        cd SchemaCrawler
+        mvn \
+          --no-transfer-progress \
+          --batch-mode \
+          -DskipTests=true \
+          clean install
 
 # BUILD AND TEST
     - id: build-test
