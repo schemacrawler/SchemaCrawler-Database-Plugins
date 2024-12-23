@@ -42,11 +42,6 @@
 	-->
     <dependency>
       <groupId>us.fatehi</groupId>
-      <artifactId>schemacrawler-teiid</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>us.fatehi</groupId>
       <artifactId>schemacrawler-trino</artifactId>
       <version>${project.version}</version>
     </dependency>

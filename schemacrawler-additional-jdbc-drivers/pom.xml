@@ -13,21 +13,6 @@
   <name>SchemaCrawler - Additional JDBC Drivers Distribution</name>
 
   <dependencies>
-
-    <!-- Teiid -->
-    <dependency>
-      <groupId>org.teiid</groupId>
-      <artifactId>teiid-runtime</artifactId>
-      <version>16.0.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.teiid.connectors</groupId>
-      <artifactId>translator-jdbc</artifactId>
-      <version>16.0.0</version>
-      <scope>test</scope>
-    </dependency>
-
   </dependencies>
 
 </project>
