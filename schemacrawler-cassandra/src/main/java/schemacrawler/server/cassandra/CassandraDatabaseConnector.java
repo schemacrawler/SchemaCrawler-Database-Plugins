@@ -26,7 +26,7 @@ http://www.gnu.org/licenses/
 ========================================================================
 */
 
-package schemacrawler.tools.cassandra;
+package schemacrawler.server.cassandra;
 
 import static schemacrawler.schemacrawler.MetadataRetrievalStrategy.none;
 import static schemacrawler.schemacrawler.SchemaInfoMetadataRetrievalStrategy.foreignKeysRetrievalStrategy;

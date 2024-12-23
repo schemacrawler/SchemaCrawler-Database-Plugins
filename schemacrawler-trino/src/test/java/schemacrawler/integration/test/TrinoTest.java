@@ -53,8 +53,7 @@ import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 @Testcontainers
 public class TrinoTest extends BaseAdditionalDatabaseTest {
 
-  @Container
-  private final JdbcDatabaseContainer<?> dbContainer = newTrinoContainer();
+  @Container private final JdbcDatabaseContainer<?> dbContainer = newTrinoContainer();
 
   @BeforeEach
   public void createDatabase() {

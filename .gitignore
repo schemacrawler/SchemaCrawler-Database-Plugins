@@ -1,3 +1,7 @@
+## Apache Derby
+**/derby.log
+**/testdb
+
 # Eclipse
 .project
 .classpath

@@ -19,6 +19,7 @@
     <module>schemacrawler-hana</module>
     <module>schemacrawler-trino</module>
     <module>schemacrawler-cassandra</module>
+	<module>schemacrawler-derby</module>
 	<module>schemacrawler-database-plugins-distrib</module>
   </modules>
 </project>

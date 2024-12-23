@@ -28,21 +28,20 @@ http://www.gnu.org/licenses/
 package schemacrawler.integration.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static schemacrawler.integration.test.utility.CassandraTestUtility.newCassandraContainer;
 import static schemacrawler.test.utility.ExecutableTestUtility.executableExecution;
 import static schemacrawler.test.utility.FileHasContent.classpathResource;
 import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
 import static schemacrawler.test.utility.FileHasContent.outputOf;
 import static schemacrawler.test.utility.TestUtility.javaVersion;
-import java.net.InetSocketAddress;
+import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
+import org.apache.derby.drda.NetworkServerControl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.testcontainers.cassandra.CassandraContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import schemacrawler.schemacrawler.InfoLevel;
 import schemacrawler.schemacrawler.LimitOptionsBuilder;
@@ -51,40 +50,52 @@ import schemacrawler.schemacrawler.SchemaCrawlerOptions;
 import schemacrawler.schemacrawler.SchemaCrawlerOptionsBuilder;
 import schemacrawler.schemacrawler.SchemaInfoLevelBuilder;
 import schemacrawler.test.utility.BaseAdditionalDatabaseTest;
-import schemacrawler.tools.command.text.schema.options.SchemaTextOptions;
 import schemacrawler.tools.command.text.schema.options.SchemaTextOptionsBuilder;
 import schemacrawler.tools.executable.SchemaCrawlerExecutable;
+import us.fatehi.utility.IOUtility;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @Testcontainers
-public class CassandraTest extends BaseAdditionalDatabaseTest {
+public class DerbyTest extends BaseAdditionalDatabaseTest {
 
-  @Container private final CassandraContainer dbContainer = newCassandraContainer();
+  private NetworkServerControl server;
 
   @BeforeEach
-  public void createDatabase() {
+  public void createDatabase() throws Exception {
 
-    if (!dbContainer.isRunning()) {
-      fail("Testcontainer for database is not available");
+    // Set system properties for authentication
+    final Path tempDerbyHome = IOUtility.createTempFilePath("schemacrawler", "derby");
+    System.setProperty("derby.system.home", tempDerbyHome.toString());
+    /*
+    System.setProperty("derby.connection.requireAuthentication", "true");
+    System.setProperty("derby.authentication.provider", "BUILTIN");
+    System.setProperty("derby.user.schemacrawler", "schemacrawler");
+    System.setProperty("derby.stream.error.logSeverityLevel", "0");
+    */
+
+    final PrintWriter consoleWriter = new PrintWriter(System.out, true);
+    server = new NetworkServerControl();
+    server.start(consoleWriter);
+
+    // Connect to the network server
+    final String connectionUrl = "jdbc:derby://localhost:1527/testdb;create=true";
+    createDataSource(connectionUrl, null, null);
+
+    createDatabase("/derby.scripts.txt");
+  }
+
+  @AfterEach
+  public void shutdownDatabase() throws Exception {
+    if (server != null) {
+      server.shutdown();
     }
-
-    final InetSocketAddress contactPoint = dbContainer.getContactPoint();
-    final String host = contactPoint.getHostName();
-    final int port = contactPoint.getPort();
-    final String keyspace = "books";
-    final String localDatacenter = dbContainer.getLocalDatacenter();
-    final String connectionUrl =
-        String.format(
-            "jdbc:cassandra://%s:%d/%s?localdatacenter=%s", host, port, keyspace, localDatacenter);
-    System.out.printf("url=%s%n", connectionUrl);
-    createDataSource(connectionUrl, dbContainer.getUsername(), dbContainer.getPassword());
   }
 
   @Test
-  public void testCassandraWithConnection() throws Exception {
+  public void testDerbyWithConnection() throws Exception {
 
     final LimitOptionsBuilder limitOptionsBuilder =
-        LimitOptionsBuilder.builder().includeSchemas(Pattern.compile("books"));
+        LimitOptionsBuilder.builder().includeSchemas(Pattern.compile("BOOKS"));
     final SchemaInfoLevelBuilder schemaInfoLevelBuilder =
         SchemaInfoLevelBuilder.builder().withInfoLevel(InfoLevel.maximum);
     final LoadOptionsBuilder loadOptionsBuilder =
@@ -95,14 +106,12 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
             .withLoadOptions(loadOptionsBuilder.toOptions());
     final SchemaTextOptionsBuilder textOptionsBuilder = SchemaTextOptionsBuilder.builder();
     textOptionsBuilder.showDatabaseInfo().showJdbcDriverInfo();
-    final SchemaTextOptions textOptions = textOptionsBuilder.toOptions();
 
     final SchemaCrawlerExecutable executable = new SchemaCrawlerExecutable("details");
     executable.setSchemaCrawlerOptions(schemaCrawlerOptions);
-    executable.setAdditionalConfiguration(SchemaTextOptionsBuilder.builder(textOptions).toConfig());
+    executable.setAdditionalConfiguration(textOptionsBuilder.toConfig());
 
-    final String expectedResource =
-        String.format("testCassandraWithConnection.%s.txt", javaVersion());
+    final String expectedResource = String.format("testDerbyWithConnection.%s.txt", javaVersion());
     assertThat(
         outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));

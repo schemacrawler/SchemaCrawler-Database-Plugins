@@ -1,0 +1,9 @@
+** Connect to Apache Derby
+
+      --database=<database>
+                          Database name
+      --server=<server>   --server=derby
+                          Loads SchemaCrawler plug-in for Apache Derby
+Add connection options to the `connect` command in the SchemaCrawler Shell
+
+

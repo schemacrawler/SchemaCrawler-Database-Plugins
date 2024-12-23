@@ -26,35 +26,30 @@ http://www.gnu.org/licenses/
 ========================================================================
 */
 
-package schemacrawler.tools.trino;
-
-import static schemacrawler.schemacrawler.MetadataRetrievalStrategy.none;
-import static schemacrawler.schemacrawler.SchemaInfoMetadataRetrievalStrategy.indexesRetrievalStrategy;
+package schemacrawler.server.derby;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 
-public final class TrinoDatabaseConnector extends DatabaseConnector {
+public final class DerbyDatabaseConnector extends DatabaseConnector {
 
-  private static final Logger LOGGER = Logger.getLogger(TrinoDatabaseConnector.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(DerbyDatabaseConnector.class.getName());
 
-  public TrinoDatabaseConnector() {
+  public DerbyDatabaseConnector() {
     super(
-        new DatabaseServerType("trino", "Trino"),
-        url -> url != null && url.startsWith("jdbc:trino:"),
+        new DatabaseServerType("derby", "Apache Derby"),
+        url -> url != null && url.startsWith("jdbc:derby:"),
         (informationSchemaViewsBuilder, connection) -> {},
-        (schemaRetrievalOptionsBuilder, connection) ->
-            schemaRetrievalOptionsBuilder.with(indexesRetrievalStrategy, none),
+        (schemaRetrievalOptionsBuilder, connection) -> {},
         limitOptionsBuilder -> {},
         () ->
-            DatabaseConnectionSourceBuilder.builder("jdbc:trino://${host}:${port}/${database}")
-                .withDefaultPort(8080));
-    LOGGER.log(Level.INFO, "Loaded commandline for Trino");
+            DatabaseConnectionSourceBuilder.builder("jdbc:derby://${host}:${port}/${database}")
+                .withDefaultPort(1527));
+    LOGGER.log(Level.INFO, "Loaded commandline for Derby");
   }
 
   @Override
@@ -62,7 +57,9 @@ public final class TrinoDatabaseConnector extends DatabaseConnector {
     final PluginCommand pluginCommand = super.getHelpCommand();
     pluginCommand
         .addOption(
-            "server", String.class, "--server=trino%n" + "Loads SchemaCrawler plug-in for Trino")
+            "server",
+            String.class,
+            "--server=derby%n" + "Loads SchemaCrawler plug-in for Apache Derby")
         .addOption("database", String.class, "Database name");
     return pluginCommand;
   }
