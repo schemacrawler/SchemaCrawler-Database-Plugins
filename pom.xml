@@ -7,22 +7,19 @@
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
     <version>16.24.2</version>
+    <relativePath>./schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
-  <artifactId>schemacrawler-database-plugins-parent</artifactId>
+  <artifactId>schemacrawler-database-plugins-aggregator</artifactId>
   <packaging>pom</packaging>
-  <name>SchemaCrawler Database Plugins</name>
-  <description>Additional SchemaCrawler database plugins</description>
-  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-  <scm>
-    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-  </scm>
+  <name>SchemaCrawler Database Plugins [Aggregator]</name>
   <modules>
+    <module>schemacrawler-additional-jdbc-drivers</module>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
     <module>schemacrawler-teiid</module>
     <module>schemacrawler-trino</module>
     <module>schemacrawler-cassandra</module>
+	<module>schemacrawler-database-plugins-distrib</module>
   </modules>
 </project>

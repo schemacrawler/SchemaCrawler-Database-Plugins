@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>us.fatehi</groupId>
+    <artifactId>schemacrawler-parent</artifactId>
+    <version>16.24.2</version>
+  </parent>
+  <artifactId>schemacrawler-database-plugins-parent</artifactId>
+  <packaging>pom</packaging>
+  <name>SchemaCrawler Database Plugins [Parent]</name>
+
+  <description>Additional SchemaCrawler Database Plugins</description>
+  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+  <scm>
+    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
+  </scm>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-testdb</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-api</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-tools</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>us.fatehi</groupId>
+      <artifactId>schemacrawler-commandline</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>cassandra</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+  <build>
+  </build>
+</project>

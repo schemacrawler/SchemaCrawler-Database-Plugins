@@ -8,9 +8,10 @@
     <version>16.24.2</version>
     <relativePath>../schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
-  <artifactId>schemacrawler-teiid</artifactId>
-  <packaging>jar</packaging>
-  <name>SchemaCrawler for Teiid</name>
+  <artifactId>schemacrawler-additional-jdbc-drivers</artifactId>
+  <packaging>pom</packaging>
+  <name>SchemaCrawler - Additional JDBC Drivers Distribution</name>
+
   <dependencies>
 
     <!-- Teiid -->
@@ -28,16 +29,5 @@
     </dependency>
 
   </dependencies>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>false</skip>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+
 </project>
