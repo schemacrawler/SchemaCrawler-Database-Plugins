@@ -12,6 +12,7 @@
       <scope>runtime</scope>
       <excludes>
         <exclude>org.slf4j:*</exclude>
+		<exclude>commons-codec:*</exclude>
       </excludes>
     </dependencySet>
   </dependencySets>
