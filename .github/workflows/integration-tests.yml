@@ -59,7 +59,7 @@ jobs:
         mvn \
           --no-transfer-progress \
           --batch-mode \
-          -Dtestcoverage \
+          -Dheavydb \
           clean install \
           org.jacoco:jacoco-maven-plugin:0.8.11:report-aggregate
 
