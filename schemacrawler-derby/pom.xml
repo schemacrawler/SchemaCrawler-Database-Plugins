@@ -14,13 +14,6 @@
   <dependencies>
 
     <dependency>
-      <groupId>us.fatehi</groupId>
-      <artifactId>schemacrawler-additional-jdbc-drivers</artifactId>
-      <version>${project.version}</version>
-	  <type>pom</type>
-    </dependency>
-
-    <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derbyclient</artifactId>
       <version>10.17.1.0</version>
