@@ -25,38 +25,35 @@ http://www.gnu.org/licenses/
 
 ========================================================================
 */
-
 package schemacrawler.integration.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import java.sql.Connection;
+import static schemacrawler.test.utility.FileHasContent.classpathResource;
+import static schemacrawler.test.utility.FileHasContent.hasNoContent;
+import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
+import static schemacrawler.test.utility.FileHasContent.outputOf;
 import org.junit.jupiter.api.Test;
-import schemacrawler.tools.databaseconnector.DatabaseConnector;
-import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
+import schemacrawler.Main;
+import schemacrawler.test.utility.CaptureSystemStreams;
+import schemacrawler.test.utility.CapturedSystemStreams;
+import schemacrawler.test.utility.ResolveTestContext;
+import schemacrawler.test.utility.TestContext;
 
-public class BundledDistributionTest {
+@ResolveTestContext
+@CaptureSystemStreams
+public class CommandLineHelpTest {
+
+  private static final String COMMAND_LINE_HELP_OUTPUT = "command_line_help_output/";
 
   @Test
-  public void testInformationSchema() throws Exception {
-    final Connection connection = null;
-    final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    final DatabaseConnector databaseSystemIdentifier =
-        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("cassandra");
+  public void commandLineHelp(final TestContext testContext, final CapturedSystemStreams streams)
+      throws Exception {
+    final String server = "access";
+    Main.main("--help", "server:" + server);
+
+    assertThat(outputOf(streams.err()), hasNoContent());
     assertThat(
-        databaseSystemIdentifier
-            .getSchemaRetrievalOptionsBuilder(connection)
-            .toOptions()
-            .getInformationSchemaViews()
-            .size(),
-        is(0));
-  }
-
-  @Test
-  public void testPlugin() throws Exception {
-    final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    assertThat(registry.hasDatabaseSystemIdentifier("cassandra"), is(true));
+        outputOf(streams.out()),
+        hasSameContentAs(classpathResource(COMMAND_LINE_HELP_OUTPUT + server + ".help.txt")));
   }
 }

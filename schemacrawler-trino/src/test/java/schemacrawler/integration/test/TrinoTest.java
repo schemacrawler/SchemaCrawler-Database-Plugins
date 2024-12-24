@@ -47,8 +47,10 @@ import schemacrawler.schemacrawler.LimitOptionsBuilder;
 import schemacrawler.schemacrawler.SchemaCrawlerOptions;
 import schemacrawler.schemacrawler.SchemaCrawlerOptionsBuilder;
 import schemacrawler.test.utility.BaseAdditionalDatabaseTest;
+import schemacrawler.test.utility.HeavyDatabaseTest;
 import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 
+@HeavyDatabaseTest("trino")
 @TestInstance(Lifecycle.PER_CLASS)
 @Testcontainers
 public class TrinoTest extends BaseAdditionalDatabaseTest {

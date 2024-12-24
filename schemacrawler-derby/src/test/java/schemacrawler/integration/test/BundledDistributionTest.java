@@ -38,7 +38,7 @@ import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 public class BundledDistributionTest {
 
   @Test
-  public void testInformationSchema_trino() throws Exception {
+  public void testInformationSchema() throws Exception {
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
@@ -54,7 +54,7 @@ public class BundledDistributionTest {
   }
 
   @Test
-  public void testPlugin_trino() throws Exception {
+  public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("derby"), is(true));

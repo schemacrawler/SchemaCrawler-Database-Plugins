@@ -32,7 +32,11 @@ import static schemacrawler.test.utility.ExecutableTestUtility.executableExecuti
 import static schemacrawler.test.utility.FileHasContent.classpathResource;
 import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
 import static schemacrawler.test.utility.FileHasContent.outputOf;
+import static schemacrawler.test.utility.TestUtility.copyResourceToTempFile;
+import static schemacrawler.test.utility.TestUtility.failTestSetup;
 import static schemacrawler.test.utility.TestUtility.javaVersion;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,23 +55,26 @@ import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @Testcontainers
-public class DerbyTest extends BaseAdditionalDatabaseTest {
+public class AccessTest extends BaseAdditionalDatabaseTest {
 
   @BeforeEach
-  public void createDatabase() throws Exception {
+  public void createDatabase() {
+    try {
 
-    // Connect to the network server
-    final String connectionUrl = "jdbc:derby:memory:testdb;create=true";
-    createDataSource(connectionUrl, null, null);
-
-    createDatabase("/derby.scripts.txt");
+      Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+      final Path databaseFile = copyResourceToTempFile("/Books2010.accdb");
+      createDataSource(
+          "jdbc:ucanaccess://" + databaseFile + ";showSchema=true;sysSchema=true", null, null);
+    } catch (final ClassNotFoundException | IOException e) {
+      failTestSetup("Could not create database", e);
+    }
   }
 
   @Test
-  public void testDerbyWithConnection() throws Exception {
+  public void testAccessWithConnection() throws Exception {
 
     final LimitOptionsBuilder limitOptionsBuilder =
-        LimitOptionsBuilder.builder().includeSchemas(Pattern.compile("BOOKS"));
+        LimitOptionsBuilder.builder().includeSchemas(Pattern.compile(".*"));
     final SchemaInfoLevelBuilder schemaInfoLevelBuilder =
         SchemaInfoLevelBuilder.builder().withInfoLevel(InfoLevel.maximum);
     final LoadOptionsBuilder loadOptionsBuilder =
@@ -83,7 +90,7 @@ public class DerbyTest extends BaseAdditionalDatabaseTest {
     executable.setSchemaCrawlerOptions(schemaCrawlerOptions);
     executable.setAdditionalConfiguration(textOptionsBuilder.toConfig());
 
-    final String expectedResource = String.format("testDerbyWithConnection.%s.txt", javaVersion());
+    final String expectedResource = String.format("testAccessWithConnection.%s.txt", javaVersion());
     assertThat(
         outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));

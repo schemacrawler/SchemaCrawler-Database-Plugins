@@ -43,7 +43,7 @@ public class BundledDistributionTest {
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     final DatabaseConnector databaseSystemIdentifier =
-        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("cassandra");
+        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("access");
     assertThat(
         databaseSystemIdentifier
             .getSchemaRetrievalOptionsBuilder(connection)
@@ -57,6 +57,6 @@ public class BundledDistributionTest {
   public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    assertThat(registry.hasDatabaseSystemIdentifier("cassandra"), is(true));
+    assertThat(registry.hasDatabaseSystemIdentifier("access"), is(true));
   }
 }
