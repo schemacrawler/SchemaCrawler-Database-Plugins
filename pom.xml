@@ -13,7 +13,6 @@
   <packaging>pom</packaging>
   <name>SchemaCrawler Database Plugins [Aggregator]</name>
   <modules>
-    <module>schemacrawler-additional-jdbc-drivers</module>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
