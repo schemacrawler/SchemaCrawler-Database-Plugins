@@ -51,17 +51,17 @@ import schemacrawler.schemacrawler.SchemaCrawlerOptions;
 import schemacrawler.schemacrawler.SchemaCrawlerOptionsBuilder;
 import schemacrawler.schemacrawler.SchemaInfoLevelBuilder;
 import schemacrawler.test.utility.BaseAdditionalDatabaseTest;
+import schemacrawler.test.utility.HeavyDatabaseTest;
 import schemacrawler.tools.command.text.schema.options.SchemaTextOptions;
 import schemacrawler.tools.command.text.schema.options.SchemaTextOptionsBuilder;
 import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 
+@HeavyDatabaseTest("cassandra")
 @TestInstance(Lifecycle.PER_CLASS)
 @Testcontainers
 public class CassandraTest extends BaseAdditionalDatabaseTest {
 
-
-  @Container
-  private final CassandraContainer dbContainer = newCassandraContainer();
+  @Container private final CassandraContainer dbContainer = newCassandraContainer();
 
   @BeforeEach
   public void createDatabase() {
@@ -75,8 +75,9 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
     final int port = contactPoint.getPort();
     final String keyspace = "books";
     final String localDatacenter = dbContainer.getLocalDatacenter();
-    final String connectionUrl = String.format("jdbc:cassandra://%s:%d/%s?localdatacenter=%s", host,
-        port, keyspace, localDatacenter);
+    final String connectionUrl =
+        String.format(
+            "jdbc:cassandra://%s:%d/%s?localdatacenter=%s", host, port, keyspace, localDatacenter);
     System.out.printf("url=%s%n", connectionUrl);
     createDataSource(connectionUrl, dbContainer.getUsername(), dbContainer.getPassword());
   }
@@ -90,9 +91,10 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
         SchemaInfoLevelBuilder.builder().withInfoLevel(InfoLevel.maximum);
     final LoadOptionsBuilder loadOptionsBuilder =
         LoadOptionsBuilder.builder().withSchemaInfoLevelBuilder(schemaInfoLevelBuilder);
-    final SchemaCrawlerOptions schemaCrawlerOptions = SchemaCrawlerOptionsBuilder
-        .newSchemaCrawlerOptions().withLimitOptions(limitOptionsBuilder.toOptions())
-        .withLoadOptions(loadOptionsBuilder.toOptions());
+    final SchemaCrawlerOptions schemaCrawlerOptions =
+        SchemaCrawlerOptionsBuilder.newSchemaCrawlerOptions()
+            .withLimitOptions(limitOptionsBuilder.toOptions())
+            .withLoadOptions(loadOptionsBuilder.toOptions());
     final SchemaTextOptionsBuilder textOptionsBuilder = SchemaTextOptionsBuilder.builder();
     textOptionsBuilder.showDatabaseInfo().showJdbcDriverInfo();
     final SchemaTextOptions textOptions = textOptionsBuilder.toOptions();
@@ -103,7 +105,8 @@ public class CassandraTest extends BaseAdditionalDatabaseTest {
 
     final String expectedResource =
         String.format("testCassandraWithConnection.%s.txt", javaVersion());
-    assertThat(outputOf(executableExecution(getDataSource(), executable)),
+    assertThat(
+        outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));
   }
 }

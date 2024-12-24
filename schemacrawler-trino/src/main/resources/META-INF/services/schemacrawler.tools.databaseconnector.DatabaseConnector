@@ -1,1 +1,1 @@
-schemacrawler.tools.trino.TrinoDatabaseConnector
+schemacrawler.server.trino.TrinoDatabaseConnector
