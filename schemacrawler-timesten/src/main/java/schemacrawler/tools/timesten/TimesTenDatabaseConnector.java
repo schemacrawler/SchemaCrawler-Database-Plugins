@@ -11,10 +11,10 @@ package schemacrawler.tools.timesten;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
+import us.fatehi.utility.datasource.DatabaseServerType;
 
 public final class TimesTenDatabaseConnector extends DatabaseConnector {
 

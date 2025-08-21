@@ -11,10 +11,10 @@ package schemacrawler.server.access;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import schemacrawler.schemacrawler.DatabaseServerType;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
+import us.fatehi.utility.datasource.DatabaseServerType;
 
 public final class AccessDatabaseConnector extends DatabaseConnector {
 
