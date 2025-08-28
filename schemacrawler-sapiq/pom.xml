@@ -11,6 +11,15 @@
   <artifactId>schemacrawler-sapiq</artifactId>
   <packaging>jar</packaging>
   <name>SchemaCrawler for SAP IQ</name>
+  <description>SchemaCrawler database plugin for SAP IQ</description>
+  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+  
+  <scm>
+    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
+  </scm>
+  
   <dependencies>
   </dependencies>
   <build>

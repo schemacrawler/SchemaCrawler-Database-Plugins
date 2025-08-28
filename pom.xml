@@ -12,6 +12,15 @@
   <artifactId>schemacrawler-database-plugins-aggregator</artifactId>
   <packaging>pom</packaging>
   <name>SchemaCrawler Database Plugins [Aggregator]</name>
+  <description>Additional SchemaCrawler Database Plugins - Aggregator Project</description>
+  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+  
+  <scm>
+    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
+  </scm>
+  
   <modules>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
