@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-database-plugins-parent</artifactId>
-    <version>16.28.1</version>
+    <version>16.28.2</version>
     <relativePath>./schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
   <artifactId>schemacrawler-database-plugins-aggregator</artifactId>
