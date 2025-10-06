@@ -15,7 +15,7 @@ import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
 import static schemacrawler.test.utility.FileHasContent.outputOf;
 import static schemacrawler.test.utility.TestUtility.copyResourceToTempFile;
 import static schemacrawler.test.utility.TestUtility.failTestSetup;
-import static schemacrawler.test.utility.TestUtility.javaVersion;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
@@ -69,7 +69,7 @@ public class AccessTest extends BaseAdditionalDatabaseTest {
     executable.setSchemaCrawlerOptions(schemaCrawlerOptions);
     executable.setAdditionalConfiguration(textOptionsBuilder.toConfig());
 
-    final String expectedResource = String.format("testAccessWithConnection.%s.txt", javaVersion());
+    final String expectedResource = "testAccessWithConnection.txt";
     assertThat(
         outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));

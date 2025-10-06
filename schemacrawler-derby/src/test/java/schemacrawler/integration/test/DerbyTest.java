@@ -13,7 +13,7 @@ import static schemacrawler.test.utility.ExecutableTestUtility.executableExecuti
 import static schemacrawler.test.utility.FileHasContent.classpathResource;
 import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
 import static schemacrawler.test.utility.FileHasContent.outputOf;
-import static schemacrawler.test.utility.TestUtility.javaVersion;
+
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,7 +62,7 @@ public class DerbyTest extends BaseAdditionalDatabaseTest {
     executable.setSchemaCrawlerOptions(schemaCrawlerOptions);
     executable.setAdditionalConfiguration(textOptionsBuilder.toConfig());
 
-    final String expectedResource = String.format("testDerbyWithConnection.%s.txt", javaVersion());
+    final String expectedResource = "testDerbyWithConnection.txt";
     assertThat(
         outputOf(executableExecution(getDataSource(), executable)),
         hasSameContentAs(classpathResource(expectedResource)));
