@@ -10,19 +10,19 @@ package schemacrawler.integration.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static schemacrawler.test.utility.ExecutableTestUtility.executableExecution;
-import static schemacrawler.test.utility.FileHasContent.classpathResource;
-import static schemacrawler.test.utility.FileHasContent.hasSameContentAs;
-import static schemacrawler.test.utility.FileHasContent.outputOf;
-import static schemacrawler.test.utility.TestUtility.copyResourceToTempFile;
-import static schemacrawler.test.utility.TestUtility.failTestSetup;
+import static us.fatehi.test.utility.TestUtility.copyResourceToTempFile;
+import static us.fatehi.test.utility.extensions.FileHasContent.classpathResource;
+import static us.fatehi.test.utility.extensions.FileHasContent.hasSameContentAs;
+import static us.fatehi.test.utility.extensions.FileHasContent.outputOf;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import schemacrawler.schemacrawler.InfoLevel;
 import schemacrawler.schemacrawler.LimitOptionsBuilder;
 import schemacrawler.schemacrawler.LoadOptionsBuilder;
@@ -37,16 +37,11 @@ import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 public class AccessTest extends BaseAdditionalDatabaseTest {
 
   @BeforeEach
-  public void createDatabase() {
-    try {
-
+  public void createDatabase() throws Exception {
       Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
       final Path databaseFile = copyResourceToTempFile("/Books2010.accdb");
       createDataSource(
           "jdbc:ucanaccess://" + databaseFile + ";showSchema=true;sysSchema=true", null, null);
-    } catch (final ClassNotFoundException | IOException e) {
-      failTestSetup("Could not create database", e);
-    }
   }
 
   @Test

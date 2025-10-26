@@ -10,6 +10,7 @@ package schemacrawler.server.derby;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
@@ -23,7 +24,8 @@ public final class DerbyDatabaseConnector extends DatabaseConnector {
     super(
         new DatabaseServerType("derby", "Apache Derby"),
         url -> url != null && url.startsWith("jdbc:derby:"),
-        (informationSchemaViewsBuilder, connection) -> {},
+                (informationSchemaViewsBuilder, connection) ->
+        informationSchemaViewsBuilder.fromResourceFolder("/derby.information_schema"),
         (schemaRetrievalOptionsBuilder, connection) -> {},
         limitOptionsBuilder -> {},
         () ->

@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>17.1.1</version>
+    <version>17.1.2</version>
   </parent>
   <artifactId>schemacrawler-database-plugins-distrib</artifactId>
   <packaging>pom</packaging>
@@ -56,15 +56,6 @@
     </dependency>	
   </dependencies>
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <version>2.7.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -101,7 +92,7 @@
             <configuration>
               <licensesOutputDirectory>${project.build.directory}/_licenses</licensesOutputDirectory>
               <licensesOutputFile>
-                ${project.build.directory}/_licenses/licenses..xml</licensesOutputFile>
+                ${project.build.directory}/_licenses/licenses.xml</licensesOutputFile>
               <excludedScopes>test,provided</excludedScopes>
               <cleanLicensesOutputDirectory>true</cleanLicensesOutputDirectory>
             </configuration>
