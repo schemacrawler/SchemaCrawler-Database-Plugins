@@ -1,4 +1,6 @@
 <!-- markdownlint-disable MD041 -->
+**:star: Star it :arrow_heading_up: if you love it!**
+
 [![Integration Tests](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/schemacrawler/SchemaCrawler-Database-Plugins/actions/workflows/integration-tests.yml)
 [![The Central Repository](https://img.shields.io/maven-central/v/us.fatehi/schemacrawler-database-plugins-parent.svg)](https://central.sonatype.com/search?q=us.fatehi.schemacrawler&sort=name)
 
