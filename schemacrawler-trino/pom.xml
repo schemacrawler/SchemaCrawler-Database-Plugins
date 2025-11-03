@@ -25,7 +25,7 @@
     <dependency>
       <groupId>io.trino</groupId>
       <artifactId>trino-jdbc</artifactId>
-      <version>477</version>
+      <version>478</version>
     </dependency>
 
     <dependency>
