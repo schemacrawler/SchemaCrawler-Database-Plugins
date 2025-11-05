@@ -11,14 +11,56 @@
   <artifactId>schemacrawler-database-plugins-parent</artifactId>
   <packaging>pom</packaging>
   <name>SchemaCrawler Database Plugins [Parent]</name>
-
   <description>Additional SchemaCrawler Database Plugins</description>
-  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+  <url>https://www.schemacrawler.com</url>
+  <inceptionYear>2003</inceptionYear>
+  <licenses>
+    <license>
+      <name>Eclipse Public License - v 1.0</name>
+      <url>https://www.eclipse.org/legal/epl-v10.html</url>
+    </license>
+    <license>
+      <name>GNU Lesser General Public License</name>
+      <url>http://www.gnu.org/licenses/lgpl.html</url>
+    </license>
+    <license>
+      <name>GNU General Public License</name>
+      <url>http://www.gnu.org/licenses/gpl.html</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Sualeh Fatehi</name>
+      <id>sfatehi</id>
+      <email>sualeh@hotmail.com</email>
+      <organization>Sualeh Fatehi</organization>
+      <roles>
+        <role>All</role>
+      </roles>
+      <timezone>-5</timezone>
+    </developer>
+  </developers>
+  <organization>
+    <name>Sualeh Fatehi</name>
+  </organization>
   <scm>
     <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
     <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
   </scm>
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- BOM dependencies -->
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>2.0.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>21</java.version>
