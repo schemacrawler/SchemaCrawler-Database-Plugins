@@ -41,7 +41,7 @@ import us.fatehi.test.utility.extensions.HeavyDatabaseTest;
 
 @HeavyDatabaseTest("cassandra")
 @TestInstance(Lifecycle.PER_CLASS)
-@Testcontainers
+@Testcontainers(disabledWithoutDocker=true)
 public class CassandraTest extends BaseAdditionalDatabaseTest {
 
   @Container private final CassandraContainer dbContainer = newCassandraContainer();

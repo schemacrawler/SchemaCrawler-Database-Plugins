@@ -33,7 +33,7 @@ import us.fatehi.test.utility.extensions.HeavyDatabaseTest;
 
 @HeavyDatabaseTest("trino")
 @TestInstance(Lifecycle.PER_CLASS)
-@Testcontainers
+@Testcontainers(disabledWithoutDocker=true)
 public class TrinoTest extends BaseAdditionalDatabaseTest {
 
   @Container private final JdbcDatabaseContainer<?> dbContainer = newTrinoContainer();
