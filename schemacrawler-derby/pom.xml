@@ -1,6 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>us.fatehi</groupId>
@@ -11,15 +13,6 @@
   <artifactId>schemacrawler-derby</artifactId>
   <packaging>jar</packaging>
   <name>SchemaCrawler for Apache Derby</name>
-  <description>SchemaCrawler database plugin for Apache Derby</description>
-  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-  
-  <scm>
-    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
-  </scm>
-  
   <dependencies>
 
     <dependency>
@@ -45,6 +38,24 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+              <Author>Sualeh Fatehi sualeh@hotmail.com</Author>
+              <Copyright>Copyright (c) 2000-2025, Sualeh Fatehi</Copyright>
+              <Website>https://www.SchemaCrawler.com</Website>
+              <Automatic-Module-Name>us.fatehi.schemacrawler.derby</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
