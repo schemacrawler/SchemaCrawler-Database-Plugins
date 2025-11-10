@@ -11,10 +11,6 @@
   <artifactId>schemacrawler-database-plugins-distrib</artifactId>
   <packaging>pom</packaging>
   <name>SchemaCrawler Database Plugins Distribution</name>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
   <dependencies>
 
 	<!--

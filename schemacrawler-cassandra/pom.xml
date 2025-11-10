@@ -14,12 +14,6 @@
   <description>SchemaCrawler database plugin for Cassandra</description>
   <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
   
-  <scm>
-    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
-  </scm>
-  
   <dependencies>
 
     

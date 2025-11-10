@@ -15,20 +15,20 @@
   <description>Additional SchemaCrawler Database Plugins - Aggregator Project</description>
   <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
   
-  <scm>
-    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
-  </scm>
-  
   <modules>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
     <module>schemacrawler-trino</module>
     <module>schemacrawler-cassandra</module>
-	<module>schemacrawler-derby</module>
-	<module>schemacrawler-access</module>
-	<module>schemacrawler-database-plugins-distrib</module>
+    <module>schemacrawler-derby</module>
+    <module>schemacrawler-access</module>
+    <module>schemacrawler-database-plugins-distrib</module>
   </modules>
+  
+  <scm>
+    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
+    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
+  </scm>
 </project>
