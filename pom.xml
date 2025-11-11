@@ -13,7 +13,6 @@
   <packaging>pom</packaging>
 
   <name>SchemaCrawler Database Plugins [Aggregator]</name>
-  <description>Additional SchemaCrawler Database Plugins - Aggregator Project</description>
 
   <modules>
     <module>schemacrawler-sapiq</module>
@@ -23,7 +22,7 @@
     <module>schemacrawler-cassandra</module>
     <module>schemacrawler-derby</module>
     <module>schemacrawler-access</module>
-    <module>schemacrawler-database-plugins-distrib</module>
+    <module>schemacrawler-database-plugins-library-bom</module>
   </modules>
 
 </project>

@@ -1,6 +1,7 @@
 ## Apache Derby
 **/derby.log
 **/testdb
+**/tree.txt
 
 # Eclipse
 .project
