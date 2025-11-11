@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>us.fatehi</groupId>
-    <artifactId>schemacrawler-database-plugins-parent</artifactId>
+    <artifactId>schemacrawler-parent</artifactId>
     <version>17.1.4</version>
-    <relativePath>./schemacrawler-database-plugins-parent/pom.xml</relativePath>
   </parent>
   <artifactId>schemacrawler-database-plugins-aggregator</artifactId>
   <packaging>pom</packaging>
+
   <name>SchemaCrawler Database Plugins [Aggregator]</name>
   <description>Additional SchemaCrawler Database Plugins - Aggregator Project</description>
-  <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-  
+
   <modules>
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
@@ -25,10 +25,5 @@
     <module>schemacrawler-access</module>
     <module>schemacrawler-database-plugins-distrib</module>
   </modules>
-  
-  <scm>
-    <url>https://github.com/schemacrawler/SchemaCrawler-Database-Plugins</url>
-    <connection>scm:git:git://github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/schemacrawler/SchemaCrawler-Database-Plugins.git</developerConnection>
-  </scm>
+
 </project>
