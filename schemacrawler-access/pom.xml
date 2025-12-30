@@ -6,7 +6,7 @@
   <parent>
     <groupId>us.fatehi</groupId>
     <artifactId>schemacrawler-parent</artifactId>
-    <version>17.1.7</version>
+    <version>17.2.8</version>
   </parent>
 
   <artifactId>schemacrawler-access</artifactId>
@@ -66,8 +66,7 @@
     </dependency>
     <dependency>
       <groupId>us.fatehi</groupId>
-      <artifactId>schemacrawler-tools</artifactId>
-      <type>test-jar</type>
+      <artifactId>schemacrawler-tests</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
