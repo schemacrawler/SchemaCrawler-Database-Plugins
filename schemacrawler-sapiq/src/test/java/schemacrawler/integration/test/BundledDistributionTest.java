@@ -12,7 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.sql.Connection;
-
 import org.junit.jupiter.api.Test;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
 import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
@@ -20,7 +19,7 @@ import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 public class BundledDistributionTest {
 
   @Test
-  public void testInformationSchema_sapiq() throws Exception {
+  public void testInformationSchema() throws Exception {
 
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
@@ -37,7 +36,7 @@ public class BundledDistributionTest {
   }
 
   @Test
-  public void testPlugin_sapiq() throws Exception {
+  public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
