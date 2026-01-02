@@ -90,7 +90,7 @@
         <artifactId>schemacrawler-access</artifactId>
         <version>${project.version}</version>
       </dependency>
-	  <!--
+      <!--
       <dependency>
         <groupId>us.fatehi</groupId>
         <artifactId>schemacrawler-sapiq</artifactId>
@@ -106,7 +106,7 @@
         <artifactId>schemacrawler-hana</artifactId>
         <version>${project.version}</version>
       </dependency>
-	  -->
+      -->
     </dependencies>
   </dependencyManagement>
 
