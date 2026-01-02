@@ -17,7 +17,7 @@ import schemacrawler.tools.databaseconnector.DatabaseConnectorRegistry;
 public class BundledDistributionTest {
 
   @Test
-  public void testPlugin_timesten() throws Exception {
+  public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
         DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("timesten"), is(true));
