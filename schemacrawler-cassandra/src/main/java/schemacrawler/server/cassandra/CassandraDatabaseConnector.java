@@ -16,6 +16,8 @@ import static schemacrawler.schemacrawler.SchemaInfoMetadataRetrievalStrategy.pr
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptions;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptionsBuilder;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 import us.fatehi.utility.datasource.DatabaseServerType;
@@ -24,26 +26,14 @@ public final class CassandraDatabaseConnector extends DatabaseConnector {
 
   private static final Logger LOGGER = Logger.getLogger(CassandraDatabaseConnector.class.getName());
 
-  public CassandraDatabaseConnector() {
-    super(
-        new DatabaseServerType("cassandra", "Cassandra"),
-        url -> url != null && url.startsWith("jdbc:cassandra:"),
-        (informationSchemaViewsBuilder, connection) -> {},
-        (schemaRetrievalOptionsBuilder, connection) ->
-            schemaRetrievalOptionsBuilder
-                .with(foreignKeysRetrievalStrategy, none)
-                .with(proceduresRetrievalStrategy, none)
-                .with(functionsRetrievalStrategy, none),
-        limitOptionsBuilder -> {},
-        () ->
-            DatabaseConnectionSourceBuilder.builder("jdbc:cassandra://${host}:${port}/${database}")
-                .withDefaultPort(9042));
-    LOGGER.log(Level.INFO, "Loaded commandline for Cassandra");
-  }
+  private static DatabaseConnectorOptions databaseConnectorOptions() {
+    final DatabaseServerType dbServerType = new DatabaseServerType("cassandra", "Cassandra");
 
-  @Override
-  public PluginCommand getHelpCommand() {
-    final PluginCommand pluginCommand = super.getHelpCommand();
+    final DatabaseConnectionSourceBuilder connectionSourceBuilder =
+        DatabaseConnectionSourceBuilder.builder("jdbc:cassandra://${host}:${port}/${database}")
+            .withDefaultPort(9042);
+
+    final PluginCommand pluginCommand = PluginCommand.newDatabasePluginCommand(dbServerType);
     pluginCommand
         .addOption(
             "server",
@@ -58,6 +48,22 @@ public final class CassandraDatabaseConnector extends DatabaseConnector {
                 + "See https://github.com/ing-bank/cassandra-jdbc-wrapper")
         .addOption("port", Integer.class, "Port number%n" + "Optional, defaults to 9042")
         .addOption("database", String.class, "Keyspace name");
-    return pluginCommand;
+
+    return DatabaseConnectorOptionsBuilder.builder(dbServerType)
+        .withHelpCommand(pluginCommand)
+        .withUrlStartsWith("jdbc:cassandra:")
+        .withDatabaseConnectionSourceBuilder(() -> connectionSourceBuilder)
+        .withSchemaRetrievalOptionsBuilder(
+            (schemaRetrievalOptionsBuilder, connection) ->
+                schemaRetrievalOptionsBuilder
+                    .with(foreignKeysRetrievalStrategy, none)
+                    .with(proceduresRetrievalStrategy, none)
+                    .with(functionsRetrievalStrategy, none))
+        .build();
+  }
+
+  public CassandraDatabaseConnector() {
+    super(databaseConnectorOptions());
+    LOGGER.log(Level.INFO, "Loaded commandline for Cassandra");
   }
 }

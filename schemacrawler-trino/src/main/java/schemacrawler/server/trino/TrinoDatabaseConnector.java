@@ -14,6 +14,8 @@ import static schemacrawler.schemacrawler.SchemaInfoMetadataRetrievalStrategy.in
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptions;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptionsBuilder;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 import us.fatehi.utility.datasource.DatabaseServerType;
@@ -22,27 +24,31 @@ public final class TrinoDatabaseConnector extends DatabaseConnector {
 
   private static final Logger LOGGER = Logger.getLogger(TrinoDatabaseConnector.class.getName());
 
-  public TrinoDatabaseConnector() {
-    super(
-        new DatabaseServerType("trino", "Trino"),
-        url -> url != null && url.startsWith("jdbc:trino:"),
-        (informationSchemaViewsBuilder, connection) -> {},
-        (schemaRetrievalOptionsBuilder, connection) ->
-            schemaRetrievalOptionsBuilder.with(indexesRetrievalStrategy, none),
-        limitOptionsBuilder -> {},
-        () ->
-            DatabaseConnectionSourceBuilder.builder("jdbc:trino://${host}:${port}/${database}")
-                .withDefaultPort(8080));
-    LOGGER.log(Level.INFO, "Loaded commandline for Trino");
-  }
+  private static DatabaseConnectorOptions databaseConnectorOptions() {
+    final DatabaseServerType dbServerType = new DatabaseServerType("trino", "Trino");
 
-  @Override
-  public PluginCommand getHelpCommand() {
-    final PluginCommand pluginCommand = super.getHelpCommand();
+    final DatabaseConnectionSourceBuilder connectionSourceBuilder =
+        DatabaseConnectionSourceBuilder.builder("jdbc:trino://${host}:${port}/${database}")
+            .withDefaultPort(8080);
+
+    final PluginCommand pluginCommand = PluginCommand.newDatabasePluginCommand(dbServerType);
     pluginCommand
         .addOption(
             "server", String.class, "--server=trino%n" + "Loads SchemaCrawler plug-in for Trino")
         .addOption("database", String.class, "Database name");
-    return pluginCommand;
+
+    return DatabaseConnectorOptionsBuilder.builder(dbServerType)
+        .withHelpCommand(pluginCommand)
+        .withUrlStartsWith("jdbc:trino:")
+        .withSchemaRetrievalOptionsBuilder(
+            (schemaRetrievalOptionsBuilder, connection) ->
+                schemaRetrievalOptionsBuilder.with(indexesRetrievalStrategy, none))
+        .withDatabaseConnectionSourceBuilder(() -> connectionSourceBuilder)
+        .build();
+  }
+
+  public TrinoDatabaseConnector() {
+    super(databaseConnectorOptions());
+    LOGGER.log(Level.INFO, "Loaded commandline for Trino");
   }
 }

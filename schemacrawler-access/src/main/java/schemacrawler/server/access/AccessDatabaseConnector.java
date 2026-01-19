@@ -8,11 +8,14 @@
 
 package schemacrawler.server.access;
 
+import static schemacrawler.tools.executable.commandline.PluginCommand.newDatabasePluginCommand;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-
 import schemacrawler.tools.databaseconnector.DatabaseConnector;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptions;
+import schemacrawler.tools.databaseconnector.DatabaseConnectorOptionsBuilder;
 import schemacrawler.tools.executable.commandline.PluginCommand;
 import us.fatehi.utility.datasource.DatabaseConnectionSourceBuilder;
 import us.fatehi.utility.datasource.DatabaseServerType;
@@ -21,29 +24,32 @@ public final class AccessDatabaseConnector extends DatabaseConnector {
 
   private static final Logger LOGGER = Logger.getLogger(AccessDatabaseConnector.class.getName());
 
-  public AccessDatabaseConnector() {
-    super(
-        new DatabaseServerType("access", "Microsoft Access"),
-        url -> url != null && Pattern.compile("jdbc:.*access:.*").matcher(url).matches(),
-        (informationSchemaViewsBuilder, connection) -> {},
-        (schemaRetrievalOptionsBuilder, connection) -> {},
-        limitOptionsBuilder -> {},
-        () ->
-            DatabaseConnectionSourceBuilder.builder(
-                    "jdbc:ucanaccess://${database};showSchema=true;sysSchema=true")
-                .withDefaultPort(1527));
-    LOGGER.log(Level.INFO, "Loaded commandline for Microsoft Access");
-  }
+  private static DatabaseConnectorOptions databaseConnectorOptions() {
+    final DatabaseServerType dbServerType = new DatabaseServerType("access", "Microsoft Access");
 
-  @Override
-  public PluginCommand getHelpCommand() {
-    final PluginCommand pluginCommand = super.getHelpCommand();
+    final DatabaseConnectionSourceBuilder connectionSourceBuilder =
+        DatabaseConnectionSourceBuilder.builder(
+                "jdbc:ucanaccess://${database};showSchema=true;sysSchema=true")
+            .withDefaultPort(1527);
+
+    final PluginCommand pluginCommand = newDatabasePluginCommand(dbServerType);
     pluginCommand
         .addOption(
             "server",
             String.class,
             "--server=access%n" + "Loads SchemaCrawler plug-in for Microsoft Access")
         .addOption("database", String.class, "Database file");
-    return pluginCommand;
+
+    return DatabaseConnectorOptionsBuilder.builder(dbServerType)
+        .withHelpCommand(pluginCommand)
+        .withUrlSupportPredicate(
+            url -> url != null && Pattern.compile("jdbc:.*access:.*").matcher(url).matches())
+        .withDatabaseConnectionSourceBuilder(() -> connectionSourceBuilder)
+        .build();
+  }
+
+  public AccessDatabaseConnector() {
+    super(databaseConnectorOptions());
+    LOGGER.log(Level.INFO, "Loaded commandline for Microsoft Access");
   }
 }
