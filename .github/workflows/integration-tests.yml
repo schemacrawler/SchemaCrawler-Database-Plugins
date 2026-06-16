@@ -77,7 +77,7 @@ jobs:
       uses: actions/upload-artifact@v7
       if: always()
       with:
-        name: expected-results-${{ matrix.database }}
+        name: expected-results
         path: ./unit_tests_results_output.zip
         retention-days: 5
         if-no-files-found: ignore
