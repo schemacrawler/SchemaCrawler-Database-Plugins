@@ -1,4 +1,4 @@
-name: Integration Tests
+name: Database Integration Tests
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ permissions: read-all
 
 jobs:
   build:
-    name: Integration Tests
+    name: Database Integration Tests
     runs-on: ubuntu-latest
     steps:
 
@@ -39,9 +39,10 @@ jobs:
         repository: schemacrawler/SchemaCrawler
         artifact: us.fatehi:schemacrawler-commandline:17.11.3
 
-# BUILD AND TEST
-    - id: build-test
-      name: Build and run database integration tests
+
+# RUN DATABASE TESTS
+    - id: build-test-databases
+      name: Build and run database tests
       env:
         TZ: GMT
       shell: bash
@@ -53,6 +54,33 @@ jobs:
           -Dheavydb \
           clean install \
           org.jacoco:jacoco-maven-plugin:0.8.14:report-aggregate
+    - id: gather-expected-results
+      name: Gather expected results for failed tests
+      if: always()
+      shell: bash
+      run: |
+        # Gather expected results
+        echo "Gather expected results"
+        # DEBUG
+        echo "Current working directory:"
+        pwd
+        echo "Show expected results directories:"
+        find . \
+          -type d \
+          -name "unit_tests_results_output" \
+          -exec echo {} \;
+        # Save expected results files
+        echo "Zip expected results:"
+        .github/scripts/unit-tests-results-output.sh $(realpath .)
+    - id: upload-unit-tests-results-output
+      name: Upload expected results files
+      uses: actions/upload-artifact@v7
+      if: always()
+      with:
+        name: expected-results-${{ matrix.database }}
+        path: ./unit_tests_results_output.zip
+        retention-days: 5
+        if-no-files-found: ignore
 
 # GET TEST RESULTS
     - id: publish-test-results
