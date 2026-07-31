@@ -18,9 +18,6 @@
     <module>schemacrawler-sapiq</module>
     <module>schemacrawler-timesten</module>
     <module>schemacrawler-hana</module>
-    <module>schemacrawler-trino</module>
-    <module>schemacrawler-cassandra</module>
-    <module>schemacrawler-access</module>
     <module>schemacrawler-database-plugins-library-bom</module>
   </modules>
 

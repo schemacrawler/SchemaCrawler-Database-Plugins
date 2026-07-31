@@ -16,13 +16,14 @@ mvn clean verify -Dheavydb
 
 | Module | Database |
 |--------|---------|
-| `schemacrawler-cassandra` | Apache Cassandra |
-| `schemacrawler-trino` | Trino (distributed SQL) |
-| `schemacrawler-access` | Microsoft Access |
 | `schemacrawler-hana` | SAP HANA |
 | `schemacrawler-sapiq` | SAP IQ |
 | `schemacrawler-timesten` | Oracle TimesTen |
 | `schemacrawler-database-plugins-library-bom` | Bill of Materials for downstream consumers |
+
+> **Note:** Microsoft Access, Apache Cassandra, and Trino connectors are now provided as
+> YAML-defined plugins bundled with `schemacrawler-dbconnectors` in the main SchemaCrawler
+> distribution. They no longer require a separate plugin module.
 
 ## Database Plugin Pattern
 
