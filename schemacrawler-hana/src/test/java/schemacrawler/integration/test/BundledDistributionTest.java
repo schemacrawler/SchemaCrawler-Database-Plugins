@@ -22,11 +22,11 @@ public class BundledDistributionTest {
   public void testInformationSchema() throws Exception {
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
-    final DatabaseConnector databaseSystemIdentifier =
-        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("hana");
+        DatabaseConnectorRegistry.getRegistry();
+    final DatabaseConnector databaseConnector =
+        registry.getDatabaseConnector("hana");
     assertThat(
-        databaseSystemIdentifier
+        databaseConnector
             .getSchemaRetrievalOptionsBuilder(connection)
             .toOptions()
             .getInformationSchemaViews()
@@ -37,7 +37,7 @@ public class BundledDistributionTest {
   @Test
   public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("hana"), is(true));
   }
 }

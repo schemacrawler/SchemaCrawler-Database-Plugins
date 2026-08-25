@@ -23,9 +23,9 @@ public class BundledDistributionTest {
 
     final Connection connection = null;
     final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getRegistry();
     final DatabaseConnector dbConnector =
-        registry.findDatabaseConnectorFromDatabaseSystemIdentifier("sapiq");
+        registry.getDatabaseConnector("sapiq");
     assertThat(
         dbConnector
             .getSchemaRetrievalOptionsBuilder(connection)
@@ -38,7 +38,7 @@ public class BundledDistributionTest {
   @Test
   public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("sapiq"), is(true));
   }
 }

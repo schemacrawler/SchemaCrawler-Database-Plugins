@@ -34,7 +34,6 @@ public final class SAPIQOdbcDatabaseConnector extends DatabaseConnector {
 
     return DatabaseConnectorOptionsBuilder.builder(dbServerType)
         .withHelpCommand(pluginCommand)
-        .withUrlSupportPredicate(url -> true)
         .withInformationSchemaViewsFromResourceFolder("/sapiqodbc.information_schema")
         .withSchemaRetrievalOptionsBuilder(
             (schemaRetrievalOptionsBuilder, connection) ->
