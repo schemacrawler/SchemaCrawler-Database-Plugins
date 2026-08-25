@@ -19,7 +19,7 @@ public class BundledDistributionTest {
   @Test
   public void testPlugin() throws Exception {
     final DatabaseConnectorRegistry registry =
-        DatabaseConnectorRegistry.getDatabaseConnectorRegistry();
+        DatabaseConnectorRegistry.getRegistry();
     assertThat(registry.hasDatabaseSystemIdentifier("timesten"), is(true));
   }
 }

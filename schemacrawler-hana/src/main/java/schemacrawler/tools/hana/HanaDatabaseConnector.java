@@ -40,7 +40,6 @@ public final class HanaDatabaseConnector extends DatabaseConnector {
 
     return DatabaseConnectorOptionsBuilder.builder(dbServerType)
         .withHelpCommand(pluginCommand)
-        .withUrlStartsWith("jdbc:sap:")
         .withInformationSchemaViewsFromResourceFolder("/hana.information_schema")
         .withDatabaseConnectionSourceBuilder(() -> connectionSourceBuilder)
         .build();

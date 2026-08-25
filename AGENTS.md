@@ -103,5 +103,11 @@ Each plugin has three standard test classes in `src/test/java/schemacrawler/inte
 ## Coding Guidelines
 
 - Prefer **immutability**: use `final` on fields, parameters, and local variables.
-- Tests use **JUnit 5** with **Hamcrest** matchers; integration tests require `@HeavyDatabaseTest` and a matching Testcontainers container class.
+- Use `Optional`, streams, and functional programming idioms.
+- Sort methods based on whether they are static, then by visibility, and then alphabetically.
+- Format code using Google Java style guidelines.
+- Do not use `var` - instead use the interface or class name.
+- Ensure **thread safety**: avoid mutable shared state.
+- Write meaningful **Javadoc** for all public API.
+- Tests use **JUnit 6** with **Hamcrest** matchers; mock with **Mockito**.
 - All dependency versions are managed in `schemacrawler-parent/pom.xml`; do not declare versions in sub-module POMs.

@@ -43,7 +43,6 @@ public final class TimesTenDatabaseConnector extends DatabaseConnector {
 
     return DatabaseConnectorOptionsBuilder.builder(dbServerType)
         .withHelpCommand(pluginCommand)
-        .withUrlStartsWith("jdbc:timesten:")
         .withInformationSchemaViewsFromResourceFolder("/timesten.information_schema")
         .withDatabaseConnectionSourceBuilder(() -> connectionSourceBuilder)
         .build();
