@@ -4,7 +4,18 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+    labels:
+      - "dependencies"
+    assignees:
+      - "sualeh"
+      - "schemacrawler"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "dependencies"
+    assignees:
+      - sualeh
+      - schemacrawler
