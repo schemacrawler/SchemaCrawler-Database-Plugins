@@ -34,7 +34,7 @@ jobs:
       name: Prepare Maven build
       uses: sualeh/prepare-maven-build@v1.8.2
       with:
-        java-version: 21
+        java-version: 25
         gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
 # BUILD FOR DISTRIBUTION
@@ -47,6 +47,10 @@ jobs:
           --no-transfer-progress \
           --batch-mode \
           clean install
+        
+        # Extract project version for use in artifact paths
+        PROJECT_VERSION=$(mvn --no-transfer-progress --batch-mode help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "project-version=${PROJECT_VERSION}" >> $GITHUB_OUTPUT
 
 # CREATE GITHUB RELEASE
     - id: create-release
